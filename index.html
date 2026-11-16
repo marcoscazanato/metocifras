@@ -1,340 +1,201 @@
+
 <!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
   <meta name="viewport"
         content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#215ba5">
+  <meta name="theme-color" content="#080e1b">
   <title>MetôCifras</title>
 
   <style>
     :root {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      color: #20364f;
-      background: #f5f8fc;
-      --blue: #215ba5;
-      --line: #dce5f0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --bg: #080e1b;
+      --sidebar: #0c1526;
+      --panel: #101d31;
+      --panel-hover: #192b45;
+      --panel-soft: #15253d;
+      --line: #293a53;
+      --text: #edf5ff;
+      --muted: #a1b2ca;
+      --blue: #438fff;
+      --blue-strong: #236fe5;
+      --blue-soft: #172f52;
+      --danger: #ff8395;
+      color: var(--text);
+      background: var(--bg);
+      color-scheme: dark;
     }
-
     * { box-sizing: border-box; }
     [hidden] { display: none !important; }
-    body { margin: 0; }
+    body { margin: 0; min-height: 100dvh; }
     button, input, select, textarea { font: inherit; }
-
-    button, .button {
-      min-height: 44px;
-      padding: 10px 14px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: white;
-      color: inherit;
-      cursor: pointer;
-      touch-action: manipulation;
-    }
-
-    button:hover { background: #eaf1fc; }
-    button:disabled { opacity: .5; cursor: wait; }
-
-    button:focus-visible,
-    input:focus-visible,
-    select:focus-visible,
-    textarea:focus-visible {
-      outline: 3px solid #92b7ea;
-      outline-offset: 2px;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      min-height: 44px;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: white;
-      color: inherit;
-      font-size: 16px;
-    }
-
-    textarea { resize: vertical; line-height: 1.6; }
-
-    label {
-      display: grid;
-      gap: 7px;
-      margin: 16px 0;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    h1, h2, h3 { line-height: 1.2; }
-    h1 { font-size: 32px; letter-spacing: -1px; }
+    button { min-height: 42px; padding: 10px 15px; border: 1px solid var(--line); border-radius: 11px; background: var(--panel-soft); color: var(--text); cursor: pointer; transition: background .15s, border-color .15s, transform .15s; touch-action: manipulation; }
+    button:hover { background: #203653; border-color: #466284; }
+    button:active { transform: scale(.98); }
+    button:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+    button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid #6aaaff; outline-offset: 2px; }
+    input, select, textarea { width: 100%; min-height: 44px; padding: 11px 13px; border: 1px solid var(--line); border-radius: 11px; background: #0b182b; color: var(--text); font-size: 16px; }
+    input::placeholder, textarea::placeholder { color: #8396b0; }
+    textarea { resize: vertical; line-height: 1.55; }
+    label { display: grid; gap: 7px; margin: 15px 0; font-size: 13px; font-weight: 650; }
+    h1, h2, h3 { line-height: 1.18; letter-spacing: -.03em; }
+    h1 { font-size: clamp(32px, 4vw, 52px); }
     h2 { font-size: 24px; }
-
-    .primary {
-      color: white;
-      border-color: var(--blue);
-      background: var(--blue);
-    }
-
-    .primary:hover { background: #164780; }
+    .primary { border-color: #367fec; background: var(--blue); color: #061327; font-weight: 750; }
+    .primary:hover { background: #70aaff; border-color: #70aaff; }
     .subtle { background: transparent; border-color: transparent; }
-    .danger { color: #a12d3a; background: #fff3f5; border-color: #edc9cf; }
-    .muted { color: #6b7f98; line-height: 1.6; font-size: 14px; }
+    .danger { color: #ffd4da; background: #3b2031; border-color: #633349; }
+    .danger:hover { background: #563047; }
+    .muted { color: var(--muted); line-height: 1.5; font-size: 14px; }
     .small { font-size: 12px; }
     .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
     .grow { flex: 1; min-width: 0; }
+    .status { min-height: 18px; color: #ffa2af; font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
+    .status:empty { min-height: 0; }
+    .brand { color: #eff6ff; font-weight: 850; letter-spacing: -.05em; font-size: 23px; }
+    .brand-mark { color: #63acff; margin-right: 8px; }
+    .eyebrow { font-size: 11px; font-weight: 750; letter-spacing: 2.2px; color: #91bbef; text-transform: uppercase; }
 
-    .status {
-      min-height: 22px;
-      color: #9b303c;
-      font-size: 14px;
-      line-height: 1.5;
-      overflow-wrap: anywhere;
-    }
+    /* Login */
+    #login-screen { min-height: 100dvh; display: grid; place-items: center; padding: 20px; background: radial-gradient(circle at 15% 8%, #143e73 0, transparent 40%), radial-gradient(circle at 90% 90%, #102a51 0, transparent 38%), #080e1b; }
+    .login-card { width: min(450px, 100%); padding: 35px; border: 1px solid #355073; border-radius: 23px; background: linear-gradient(155deg, #142740, #0d192b 80%); box-shadow: 0 28px 90px #0008; }
+    .login-card h1 { font-size: 36px; margin-bottom: 10px; }
+    #auth-submit { width: 100%; margin-top: 9px; }
+    .login-bottom { justify-content: space-between; margin-top: 17px; }
 
-    #login-screen {
-      min-height: 100dvh;
-      display: grid;
-      place-items: center;
-      padding: 24px 16px;
-      background:
-        radial-gradient(circle at top right, #dceaff, transparent 50%),
-        #f5f8fc;
-    }
+    /* Estrutura: biblioteca fixa no desktop + conteúdo */
+    #shell { min-height: 100dvh; display: grid; grid-template-columns: 278px minmax(0, 1fr); }
+    .desktop-sidebar { position: sticky; top: 0; height: 100dvh; display: flex; flex-direction: column; padding: 27px 14px 20px; background: #0b1425; border-right: 1px solid #233249; }
+    .sidebar-brand { padding: 0 14px 24px; }
+    .sidebar-brand .small { margin-top: 7px; }
+    .sidebar-nav { min-height: 0; overflow: auto; padding: 0 4px 12px; scrollbar-color: #3e5877 transparent; }
+    .nav-main { width: 100%; display: flex; align-items: center; text-align: left; gap: 13px; padding: 12px 13px; margin: 0 0 6px; background: transparent; border: 1px solid transparent; font-weight: 700; }
+    .nav-main:hover, .nav-main.active { background: #1d3553; color: #fff; border-color: #2a486a; }
+    .nav-icon { display: inline-grid; place-items: center; width: 25px; height: 25px; color: #73b3ff; font-size: 19px; flex: none; }
+    .sidebar-divider { height: 1px; background: #263851; margin: 20px 10px 16px; }
+    .nav-section-title { margin: 14px 9px 4px; color: #a6bddb; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.1px; }
+    .playlist-nav { display: flex; width: 100%; min-height: 42px; gap: 10px; align-items: center; text-align: left; padding: 7px 9px; border: 1px solid transparent; border-radius: 9px; background: transparent; color: #d8e7fa; font-size: 13px; }
+    .playlist-nav:hover, .playlist-nav.active { background: #1b304e; border-color: #2c486a; }
+    .playlist-nav .playlist-mini { display: grid; place-items: center; flex: none; width: 34px; height: 34px; border-radius: 7px; background: linear-gradient(145deg, #2b5ca0, #173454); color: #dbeeff; }
+    .playlist-nav.shared .playlist-mini { background: linear-gradient(145deg, #265e83, #15344d); }
+    .playlist-nav .nav-copy { flex: 1; min-width: 0; }
+    .playlist-nav .nav-copy strong { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    .playlist-nav .nav-copy small { color: #9aafc9; font-size: 11px; }
+    .sidebar-empty { margin: 7px 12px; color: #7c93b1; font-size: 12px; }
+    .sidebar-footer { margin-top: auto; padding: 15px 7px 0; border-top: 1px solid #263851; }
+    .profile-chip { display: flex; align-items: center; gap: 10px; margin: 0 4px 10px; color: #d8e8ff; font-size: 13px; }
+    .avatar { display: grid; place-items: center; width: 34px; height: 34px; flex: none; border-radius: 50%; background: #315c92; font-weight: 800; }
+    .profile-chip strong { display: block; }
+    .profile-chip small { color: #91a8c6; }
+    .sidebar-footer .subtle { width: 100%; text-align: left; }
 
-    .login-card {
-      width: min(440px, 100%);
-      padding: 28px 24px;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      background: white;
-      box-shadow: 0 20px 70px #203d6710;
-    }
+    #app { min-width: 0; width: 100%; padding: 0 clamp(18px, 4vw, 52px) 65px; }
+    .topbar { position: sticky; top: 0; z-index: 4; display: flex; gap: 12px; align-items: center; min-height: 72px; background: #080e1bed; backdrop-filter: blur(15px); border-bottom: 1px solid #1e2d43; }
+    .topbar-brand { font-size: 16px; font-weight: 700; color: #b7cdec; }
+    .topbar-spacer { flex: 1; }
+    .icon-button { display: none; min-width: 44px; padding: 5px; font-size: 22px; }
+    #refresh { color: #aac8ee; font-size: 13px; }
+    .intro { position: relative; overflow: hidden; border-radius: 20px; margin: 24px 0 22px; padding: clamp(26px, 5vw, 51px); min-height: 193px; background: linear-gradient(120deg, #173f73, #102c50 56%, #0e213b); border: 1px solid #28527f; }
+    .intro::after { content: '♫'; position: absolute; right: 5%; top: -44px; font-size: clamp(140px, 19vw, 250px); line-height: 1; color: #76b2ff17; transform: rotate(-17deg); pointer-events: none; }
+    .intro > * { position: relative; z-index: 1; }
+    .intro h1 { margin: 8px 0 12px; overflow-wrap: anywhere; }
+    .intro p { margin: 0; max-width: 650px; color: #c1d8f5; }
+    #view-actions { margin: 3px 0 21px; }
+    #search { margin: 0 0 18px; background: #101f34; }
+    #result-count { margin: 9px 0 13px; }
+    .section-heading { color: #f1f6ff; font-size: 20px; margin: 30px 0 15px; }
 
-    .brand { font-size: 29px; font-weight: 750; color: var(--blue); }
-    .eyebrow { font-size: 11px; letter-spacing: 2px; color: #7185a1; }
-    #auth-submit { width: 100%; margin-top: 8px; }
-    .login-bottom { margin-top: 18px; justify-content: space-between; }
+    /* Listas e cartões */
+    .playlist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 15px; }
+    .playlist-card { display: block; width: 100%; padding: 12px; text-align: left; border: 1px solid #223650; border-radius: 15px; background: #121f33; }
+    .playlist-card:hover { background: #1b304c; border-color: #42648c; transform: translateY(-2px); }
+    .playlist-cover { display: grid; place-items: center; width: 100%; aspect-ratio: 1.45; border-radius: 9px; margin-bottom: 13px; background: linear-gradient(135deg, #347dcf, #1b416c 60%, #111e37); color: #e0efff; font-size: 53px; }
+    .playlist-card.shared-card .playlist-cover { background: linear-gradient(135deg, #2d759e, #1c3b69 64%, #172039); }
+    .playlist-card strong { display: block; font-size: 15px; line-height: 1.4; overflow-wrap: anywhere; }
+    .playlist-card small { display: block; margin-top: 6px; color: #9eb4cf; line-height: 1.55; }
+    .song { display: flex; align-items: center; gap: 12px; min-height: 76px; padding: 10px 13px; margin-bottom: 8px; border: 1px solid #20334e; border-radius: 13px; background: #101d30; }
+    .song:hover { background: #182a43; }
+    .song-art { display: grid; place-items: center; flex: none; width: 47px; height: 47px; border-radius: 9px; background: linear-gradient(135deg, #245e9e, #17314e); color: #c4e4ff; font-size: 23px; }
+    .song-open { flex: 1; min-width: 100px; text-align: left; border: none; padding: 4px 0; background: transparent; }
+    .song-open:hover { border: none; background: transparent; }
+    .song-open strong { display: block; font-size: 15px; line-height: 1.4; overflow-wrap: anywhere; }
+    .song-open small { display: block; color: #9aafca; margin-top: 4px; }
+    .song-key { flex: none; border-radius: 8px; padding: 7px 9px; background: #203d62; color: #9fcaff; font-weight: 800; font-size: 13px; }
+    .song-tools { display: flex; align-items: center; gap: 6px; }
+    .song-tools button { padding: 8px 10px; min-height: 37px; font-size: 12px; }
+    .empty { padding: 45px 20px; background: #111e32; border: 1px dashed #345170; border-radius: 14px; text-align: center; color: #a1b5d2; }
 
-    #app {
-      width: min(1100px, 100%);
-      margin: auto;
-      padding: 0 16px 40px;
-    }
+    /* Indicador de acessos e diálogo de compartilhamento */
+    .sharing-summary { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin: 0 0 20px; padding: 16px 18px; border: 1px solid #2b4664; border-radius: 14px; background: #101f35; }
+    .sharing-summary strong { display: block; margin-bottom: 4px; font-size: 14px; }
+    .nick-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
+    .nick-chip { display: inline-block; background: #24466f; color: #e2f1ff; padding: 5px 9px; border-radius: 100px; font-size: 12px; }
+    .recipient-row { display: flex; align-items: center; gap: 10px; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #293a53; }
+    .recipient-row:last-child { border-bottom: none; }
+    .recipient-row strong { font-size: 14px; }
+    .recipient-row button { min-height: 36px; font-size: 12px; }
+    .notice { margin: 14px 0; padding: 13px; border-radius: 10px; border: 1px solid #345477; background: #192d49; color: #bed9fa; font-size: 13px; line-height: 1.5; }
 
-    .topbar {
-      min-height: 72px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .topbar .brand { font-size: 22px; }
-    .icon-button { min-width: 44px; font-size: 22px; padding: 6px; }
-    #refresh { margin-left: auto; font-size: 13px; color: #6b7f98; }
-
-    .intro { padding: 22px 0 16px; }
-    .intro h1 { margin: 0 0 10px; }
-    .intro p { margin: 0; }
-    #view-actions { margin-bottom: 18px; }
-    #search { margin-bottom: 16px; }
-    #result-count { margin: 6px 0 12px; }
-
-    .song {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      padding: 14px 12px;
-      margin-bottom: 10px;
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      background: white;
-    }
-
-    .song-open {
-      flex: 1;
-      min-width: 120px;
-      text-align: left;
-      border: none;
-      padding: 4px;
-      background: transparent;
-    }
-
-    .song-open strong { display: block; font-size: 17px; line-height: 1.4; }
-    .song-open small { display: block; color: #72849b; margin-top: 4px; }
-    .song-key {
-      border-radius: 8px;
-      padding: 8px 10px;
-      background: #eaf2fd;
-      color: var(--blue);
-      font-weight: 700;
-      font-size: 14px;
-    }
-
-    .song-tools { display: flex; gap: 6px; }
-    .song-tools button { font-size: 13px; padding: 8px 10px; }
-
-    .empty {
-      padding: 40px 20px;
-      border: 1px dashed #c9d8eb;
-      border-radius: 14px;
-      text-align: center;
-      color: #6d829f;
-    }
-
-    dialog {
-      width: min(580px, 94vw);
-      max-height: 92dvh;
-      padding: 24px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: #f9fbff;
-      color: inherit;
-    }
-
-    dialog::backdrop {
-      background: #0d213eaa;
-      backdrop-filter: blur(3px);
-    }
-
-    .dialog-heading { display: flex; align-items: center; gap: 10px; }
+    /* Janelas e formulários */
+    dialog { width: min(590px, 94vw); max-height: 90dvh; padding: 25px; border: 1px solid #375475; border-radius: 18px; background: #121f34; color: #edf5ff; box-shadow: 0 24px 85px #0009; }
+    dialog::backdrop { background: #030913bf; backdrop-filter: blur(4px); }
+    .dialog-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 13px; }
     .dialog-heading h2 { flex: 1; margin: 0; }
-    .dialog-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+    .dialog-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+    #drawer { position: fixed; inset: 0 auto 0 0; margin: 0; width: min(350px, 90vw); height: 100dvh; max-height: 100dvh; border: 0; border-radius: 0 16px 16px 0; padding: max(22px, env(safe-area-inset-top)) 15px 24px; overflow-y: auto; background: #0b1425; }
+    #drawer .sidebar-nav { max-height: none; overflow: visible; }
+    #drawer .sidebar-brand { padding: 0; }
+    #drawer .dialog-heading { margin-bottom: 18px; }
+    #drawer .sidebar-footer { margin-top: 20px; }
 
-    #drawer {
-      position: fixed;
-      inset: 0 auto 0 0;
-      margin: 0;
-      width: min(330px, 88vw);
-      height: 100dvh;
-      max-height: 100dvh;
-      border: 0;
-      border-radius: 0;
-      padding: max(22px, env(safe-area-inset-top)) 18px 24px;
-      background: #edf3fc;
-    }
-
-    #drawer nav > button { width: 100%; text-align: left; margin-bottom: 8px; }
-    .sidebar-label {
-      padding: 13px 12px;
-      margin: 22px 0 12px;
-      border-radius: 9px;
-      background: #dfeafb;
-      color: #325782;
-      font-weight: 700;
-    }
-
-    .playlist-section { margin: 18px 0 8px; color: #71839d; font-size: 12px; }
-    .playlist-nav {
-      display: block;
-      width: 100%;
-      text-align: left;
-      margin: 5px 0;
-      border-color: transparent;
-      background: transparent;
-      overflow-wrap: anywhere;
-    }
-
-    .playlist-nav.shared { border-left: 3px solid #8ca9d0; border-radius: 3px 9px 9px 3px; }
-    .playlist-card {
-      width: 100%;
-      display: block;
-      text-align: left;
-      padding: 18px;
-      margin-bottom: 10px;
-    }
-    .playlist-card strong { display: block; }
-    .playlist-card small { display: block; margin-top: 8px; color: #71839d; }
-
-    #reader {
-      position: fixed;
-      inset: 0;
-      margin: 0;
-      width: 100%;
-      max-width: none;
-      height: 100dvh;
-      max-height: 100dvh;
-      padding: 0;
-      border: 0;
-      border-radius: 0;
-      overflow: hidden;
-      background: #fbfcff;
-    }
-
+    /* Leitor musical de tela cheia */
+    #reader { position: fixed; inset: 0; margin: 0; width: 100%; max-width: none; height: 100dvh; max-height: 100dvh; padding: 0; border: 0; border-radius: 0; overflow: hidden; background: #f4f7fc; color: #203752; --line: #c9d7e8; color-scheme: light; }
     #reader[open] { display: flex; flex-direction: column; }
-    .reader-top {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: max(5px, env(safe-area-inset-top)) 8px 5px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    #reader-title {
-      flex: 1;
-      min-width: 0;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      font-size: 16px;
-    }
-
-    .reader-controls {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      padding: 6px 10px;
-      border-bottom: 1px solid var(--line);
-      flex-wrap: wrap;
-      font-size: 14px;
-    }
-
+    #reader button { background: #fff; color: #204875; border-color: #c7d8ed; }
+    .reader-top { display: flex; align-items: center; gap: 6px; padding: max(5px, env(safe-area-inset-top)) 8px 5px; border-bottom: 1px solid var(--line); }
+    #reader-title { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 16px; }
+    .reader-controls { display: flex; align-items: center; gap: 7px; padding: 6px 10px; border-bottom: 1px solid var(--line); flex-wrap: wrap; font-size: 14px; }
     #reader-key { min-width: 35px; text-align: center; font-size: 20px; }
     #reader-original { color: #6f829b; font-size: 12px; margin-left: auto; }
-
-    #sheet {
-      flex: 1;
-      min-height: 0;
-      overflow: auto;
-      padding: 16px 16px max(30px, env(safe-area-inset-bottom));
-      font-size: 20px;
-      line-height: 1.45;
-    }
-
-    .lyric-line {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: end;
-      row-gap: 10px;
-      min-height: 1.5em;
-      margin-bottom: 12px;
-    }
-
+    #sheet { flex: 1; min-height: 0; overflow: auto; padding: 16px 16px max(30px, env(safe-area-inset-bottom)); font-size: 20px; line-height: 1.45; }
+    .lyric-line { display: flex; flex-wrap: wrap; align-items: end; row-gap: 10px; min-height: 1.5em; margin-bottom: 12px; }
     .word { display: inline-flex; align-items: end; white-space: pre; }
     .part { display: inline-flex; flex-direction: column; align-items: start; }
-    .chord {
-      color: #245fa8;
-      font-size: .8em;
-      font-weight: 750;
-      min-height: 1.4em;
-      padding-right: .2em;
-    }
-
+    .chord { color: #245fa8; font-size: .8em; font-weight: 750; min-height: 1.4em; padding-right: .2em; }
     .lyric { white-space: pre; }
     .section { font-size: 12px; letter-spacing: 1.6px; color: #7288a4; margin: 24px 0 12px; }
-
-    #reader.dark { background: #101e32; color: #edf3ff; --line: #354b69; }
-    #reader.dark button { background: #203550; color: #edf3ff; }
+    #reader.dark { background: #101e32; color: #edf3ff; --line: #354b69; color-scheme: dark; }
+    #reader.dark button { background: #203550; color: #edf3ff; border-color: #354b69; }
     #reader.dark .chord { color: #9cc4ff; }
-
     #editor-preview { overflow: auto; padding: 14px 0; font-size: 18px; }
     #song-lyrics { font-family: ui-monospace, monospace; }
-
-    @media (min-width: 700px) {
-      #app { padding-inline: 32px; }
-      .intro { padding-top: 36px; }
-      h1 { font-size: 42px; }
-      #sheet { padding: 28px 8vw 60px; }
+    #add-options .playlist-card, #picker-content .playlist-card { padding: 14px; margin: 6px 0; }
+    @media (min-width: 900px) { #sheet { padding: 28px 8vw 60px; } }
+    @media (max-width: 899px) {
+      #shell { display: block; }
+      .desktop-sidebar { display: none; }
+      .icon-button { display: inline-block; }
+      #app { padding: 0 16px 40px; }
+      .topbar { min-height: 62px; }
+      .intro { margin-top: 14px; }
+    }
+    @media (max-width: 620px) {
+      .login-card { padding: 24px; }
+      .login-card h1 { font-size: 32px; }
+      .intro { padding: 27px 22px; min-height: 170px; }
+      .intro h1 { font-size: 33px; }
+      .playlist-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .playlist-cover { aspect-ratio: 1.12; font-size: 37px; }
+      .playlist-card { padding: 9px; }
+      .song { gap: 9px; padding: 8px; flex-wrap: wrap; }
+      .song-art { width: 40px; height: 40px; }
+      .song-tools { width: 100%; justify-content: flex-end; }
+      .song-tools button { min-height: 36px; }
+      .song-key { margin-left: auto; }
+      .sharing-summary { align-items: flex-start; }
+      dialog { padding: 18px; }
     }
   </style>
 </head>
@@ -342,7 +203,7 @@
 <body>
   <section id="login-screen">
     <div class="login-card">
-      <div class="brand">♫ MetôCifras</div>
+      <div class="brand"><span class="brand-mark">♫</span>MetôCifras</div>
       <p class="eyebrow">IGREJA METODISTA</p>
       <h1 id="auth-title">Seu repertório, com você.</h1>
       <p class="muted" id="auth-description">
@@ -381,47 +242,63 @@
     </div>
   </section>
 
-  <main id="app" hidden>
-    <header class="topbar">
-      <button id="menu-open"
-              class="icon-button"
-              aria-label="Abrir menu">☰</button>
-      <span class="brand">MetôCifras</span>
-      <button id="refresh" class="subtle">↻ Atualizar</button>
-    </header>
+  <div id="shell" hidden>
+    <aside class="desktop-sidebar" aria-label="Biblioteca e navegação">
+      <div class="sidebar-brand">
+        <div class="brand"><span class="brand-mark">♫</span>MetôCifras</div>
+        <div class="muted small">Sua biblioteca musical</div>
+      </div>
+      <div id="desktop-nav" class="sidebar-nav"></div>
+      <div id="desktop-profile" class="sidebar-footer"></div>
+    </aside>
 
-    <section class="intro">
-      <h1 id="view-title">Repertório</h1>
-      <p id="view-description" class="muted"></p>
-    </section>
+    <main id="app">
+      <header class="topbar">
+        <button id="menu-open" class="icon-button" aria-label="Abrir menu">☰</button>
+        <span class="topbar-brand">Biblioteca da Igreja Metodista</span>
+        <span class="topbar-spacer"></span>
+        <button id="refresh" class="subtle" title="Atualizar repertório">↻ Atualizar</button>
+      </header>
 
-    <div id="view-actions" class="row"></div>
-    <input id="search" placeholder="Buscar música ou autor…" aria-label="Buscar">
-    <p id="app-status" class="status" role="status"></p>
-    <p id="result-count" class="muted small"></p>
-    <div id="content"></div>
-  </main>
+      <section class="intro">
+        <div class="eyebrow" id="view-eyebrow">SUA MÚSICA, EM UM SÓ LUGAR</div>
+        <h1 id="view-title">Repertório</h1>
+        <p id="view-description" class="muted"></p>
+      </section>
+
+      <div id="view-actions" class="row"></div>
+      <div id="sharing-summary" hidden></div>
+      <input id="search" type="search" placeholder="Buscar música ou autor…" aria-label="Buscar cifras">
+      <p id="app-status" class="status" role="status"></p>
+      <p id="result-count" class="muted small"></p>
+      <div id="content"></div>
+    </main>
+  </div>
 
   <dialog id="drawer" aria-label="Menu principal">
     <div class="dialog-heading">
-      <h2>MetôCifras</h2>
+      <div class="brand"><span class="brand-mark">♫</span>MetôCifras</div>
       <button id="menu-close" aria-label="Fechar menu">✕</button>
     </div>
+    <div id="mobile-nav" class="sidebar-nav"></div>
+    <div id="mobile-profile" class="sidebar-footer"></div>
+  </dialog>
 
-    <p id="user-label" class="muted"></p>
-
-    <nav>
-      <button id="nav-catalog">♫ Repertório</button>
-      <button id="nav-new-song" hidden>＋ Criar nova cifra</button>
-    </nav>
-
-    <div class="sidebar-label">Minhas Playlists</div>
-    <button id="nav-all-playlists" class="playlist-nav">Ver todas</button>
-    <div id="playlist-menu"></div>
-    <button id="nav-new-playlist" class="playlist-nav">＋ Nova playlist</button>
-
-    <hr style="border:0;border-top:1px solid var(--line);margin:24px 0">
-    <button id="logout" class="subtle">Sair da conta</button>
+  <dialog id="sharing-dialog" aria-label="Gerenciar compartilhamento">
+    <div class="dialog-heading">
+      <h2>Compartilhamento</h2>
+      <button id="sharing-close" aria-label="Fechar compartilhamento">✕</button>
+    </div>
+    <p class="muted" id="sharing-playlist-name"></p>
+    <form id="sharing-form">
+      <label>Compartilhar com outro nick
+        <input id="sharing-nick" placeholder="Nick do usuário" minlength="5" maxlength="18" autocomplete="off" required>
+      </label>
+      <button id="sharing-submit" class="primary" type="submit">Compartilhar playlist</button>
+    </form>
+    <h3 class="section-heading">Pessoas com acesso</h3>
+    <div id="sharing-recipients"></div>
+    <p id="sharing-status" class="status" role="status"></p>
   </dialog>
 
   <dialog id="reader">
@@ -518,10 +395,6 @@
   </dialog>
 
   <script>
-    /*
-    COLE A URL DA NOVA IMPLANTAÇÃO DO APPS SCRIPT.
-    O endereço precisa terminar em /exec.
-    */
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzWWStoddpEg6oadFTAxFj_EPN94WQISsAcKh4L9lsKaCmzJisLVk9BWGMzwJUOZgNC0w/exec';
 
     const $ = selector => document.querySelector(selector);
@@ -536,6 +409,8 @@
     let editingSong = null;
     let addingSong = null;
     let authMode = 'login';
+    let sharingPlaylistId = null;
+    const sharingCache = new Map();
 
     let preferences = {
       tones: {},
@@ -656,7 +531,7 @@
     }
 
     async function api(action, data = {}) {
-      if (!SCRIPT_URL.startsWith('https://script.google.com/macros/s/AKfycbzWWStoddpEg6oadFTAxFj_EPN94WQISsAcKh4L9lsKaCmzJisLVk9BWGMzwJUOZgNC0w/exec')) {
+      if (!SCRIPT_URL.startsWith('https://script.google.com/macros/s/')) {
         throw Error('Configure SCRIPT_URL no index.html.');
       }
 
@@ -701,6 +576,8 @@
     function clearSession() {
       token = '';
       user = null;
+      sharingCache.clear();
+      sharingPlaylistId = null;
 
       try {
         sessionStorage.removeItem('metocifras.session');
@@ -708,7 +585,7 @@
 
       document.querySelectorAll('dialog[open]').forEach(d => d.close());
       document.body.style.overflow = '';
-      $('#app').hidden = true;
+      $('#shell').hidden = true;
       $('#login-screen').hidden = false;
       setAuthMode('login');
     }
@@ -718,12 +595,18 @@
       songs = data.songs || [];
       playlists = data.playlists || [];
 
+      const ownIds = new Set(playlists.filter(p => !p.readOnly).map(p => p.id));
+      for (const id of sharingCache.keys()) {
+        if (!ownIds.has(id)) sharingCache.delete(id);
+      }
+      playlists.filter(p => !p.readOnly).forEach(p => {
+        const nicks = getNicksFromData(p);
+        if (nicks !== null) {
+          sharingCache.set(p.id, { nicks, loading: false, error: '' });
+        }
+      });
+
       songs.sort((a, b) => collator.compare(a.title, b.title));
-
-      $('#user-label').textContent = user.nick +
-        (user.admin ? ' · Administrador' : '');
-
-      $('#nav-new-song').hidden = !user.admin;
 
       if (
         currentView === 'playlist' &&
@@ -735,6 +618,11 @@
 
       renderMenu();
       renderView();
+
+      if (currentView === 'playlist') {
+        const selected = currentPlaylist();
+        if (selected && !selected.readOnly) ensureSharing(selected);
+      }
     }
 
     async function refresh() {
@@ -827,7 +715,7 @@
         $('#auth-password').value = '';
         $('#auth-status').textContent = '';
         $('#login-screen').hidden = true;
-        $('#app').hidden = false;
+        $('#shell').hidden = false;
       } catch (error) {
         $('#auth-status').textContent = error.message;
       } finally {
@@ -837,284 +725,370 @@
       }
     };
 
-    $('#logout').onclick = async () => {
-      try {
-        await api('logout');
-      } catch (_) {}
-
-      clearSession();
-    };
-
     $('#refresh').onclick = () => perform(refresh);
 
     function closeMenu() {
-      $('#drawer').close();
+      if ($('#drawer').open) $('#drawer').close();
+    }
+
+    function navigate(view, id = null) {
+      closeMenu();
+      currentView = view;
+      currentPlaylistId = id;
+      $('#search').value = '';
+      renderMenu();
+      renderView();
+      if (view === 'playlist') {
+        const playlist = currentPlaylist();
+        if (playlist && !playlist.readOnly) ensureSharing(playlist);
+      } else if (view === 'playlists') {
+        ensureAllSharing();
+      }
     }
 
     $('#menu-open').onclick = () => $('#drawer').showModal();
     $('#menu-close').onclick = closeMenu;
 
-    $('#nav-catalog').onclick = () => {
-      closeMenu();
-      currentView = 'catalog';
-      currentPlaylistId = null;
-      $('#search').value = '';
-      renderView();
-    };
-
-    $('#nav-all-playlists').onclick = () => {
-      closeMenu();
-      currentView = 'playlists';
-      currentPlaylistId = null;
-      $('#search').value = '';
-      renderView();
-    };
-
-    $('#nav-new-song').onclick = () => {
-      closeMenu();
-      openEditor(null);
-    };
-
-    $('#nav-new-playlist').onclick = () => {
-      closeMenu();
-      perform(() => createPlaylist());
-    };
-
     function renderMenu() {
-      const container = $('#playlist-menu');
-      container.replaceChildren();
+      for (const [navId, profileId] of [
+        ['#desktop-nav', '#desktop-profile'],
+        ['#mobile-nav', '#mobile-profile']
+      ]) {
+        const nav = $(navId);
+        const profile = $(profileId);
+        nav.replaceChildren();
+        profile.replaceChildren();
 
-      const own = playlists.filter(p => !p.readOnly);
-      const shared = playlists.filter(p => p.readOnly);
+        const catalog = button('Repertório', () => navigate('catalog'),
+          'nav-main' + (currentView === 'catalog' ? ' active' : ''));
+        catalog.prepend(element('span', 'nav-icon', '♫'));
+        nav.append(catalog);
 
-      container.append(element('p', 'playlist-section', 'PESSOAIS'));
+        const all = button('Minhas Playlists', () => navigate('playlists'),
+          'nav-main' + (currentView === 'playlists' ? ' active' : ''));
+        all.prepend(element('span', 'nav-icon', '▦'));
+        nav.append(all, element('div', 'sidebar-divider'));
 
-      if (!own.length) {
-        container.append(
-          element('p', 'muted small', 'Nenhuma playlist criada.')
-        );
-      }
+        for (const readOnly of [false, true]) {
+          nav.append(element('div', 'nav-section-title', readOnly ? 'Compartilhadas' : 'Pessoais'));
+          const group = playlists.filter(p => !!p.readOnly === readOnly)
+            .sort((a, b) => collator.compare(a.name, b.name));
+          if (!group.length) {
+            nav.append(element('p', 'sidebar-empty', 'Nenhuma playlist'));
+          }
+          group.forEach(p => {
+            const item = button('', () => navigate('playlist', p.id),
+              'playlist-nav' + (readOnly ? ' shared' : '') +
+              (currentView === 'playlist' && currentPlaylistId === p.id ? ' active' : ''));
+            const copy = element('span', 'nav-copy');
+            copy.append(element('strong', '', p.name));
+            if (readOnly) copy.append(element('small', '', 'de ' + (p.ownerNick || 'outro usuário')));
+            item.append(element('span', 'playlist-mini', readOnly ? '♧' : '♫'), copy);
+            item.title = p.name;
+            nav.append(item);
+          });
+        }
+        const create = button('＋ Nova playlist', () => {
+          closeMenu();
+          perform(() => createPlaylist());
+        }, 'nav-main');
+        nav.append(element('div', 'sidebar-divider'), create);
 
-      own.forEach(p => {
-        container.append(button(
-          p.name,
-          () => openPlaylist(p.id),
-          'playlist-nav'
-        ));
-      });
-
-      if (shared.length) {
-        container.append(
-          element('p', 'playlist-section', 'COMPARTILHADAS COM VOCÊ')
-        );
-
-        shared.forEach(p => {
-          const item = button(
-            p.name,
-            () => openPlaylist(p.id),
-            'playlist-nav shared'
-          );
-
-          item.append(
-            element('div', 'muted small', 'de ' + p.ownerNick)
-          );
-
-          container.append(item);
-        });
+        const userIcon = element('div', 'avatar', (user?.nick || 'A').slice(0, 1).toUpperCase());
+        const profileText = element('div', '');
+        profileText.append(element('strong', '', user?.nick || ''),
+          element('small', '', user?.admin ? 'Administrador' : 'Conta pessoal'));
+        const chip = element('div', 'profile-chip');
+        chip.append(userIcon, profileText);
+        profile.append(chip, button('Sair da conta', async () => {
+          try { await api('logout'); } catch (_) {}
+          closeMenu();
+          clearSession();
+        }, 'subtle'));
       }
     }
 
     function openPlaylist(id) {
-      closeMenu();
-      currentView = 'playlist';
-      currentPlaylistId = id;
-      $('#search').value = '';
-      renderView();
+      navigate('playlist', id);
     }
+
+    function normalizedNicks(value) {
+      if (!Array.isArray(value)) return null;
+      return [...new Set(value.map(item => typeof item === 'string'
+        ? item : item && (item.nick || item.userNick || item.username || item.recipientNick || ''))
+        .map(x => String(x || '').trim()).filter(Boolean))]
+        .sort((a, b) => collator.compare(a, b));
+    }
+
+    function getNicksFromData(value) {
+      if (Array.isArray(value)) return normalizedNicks(value);
+      if (!value || typeof value !== 'object') return null;
+      for (const key of ['nicks', 'sharedWith', 'sharedNicks', 'recipients', 'sharedUsers']) {
+        if (Array.isArray(value[key])) return normalizedNicks(value[key]);
+      }
+      return null;
+    }
+
+    async function ensureAllSharing() {
+      await Promise.all(playlists.filter(p => !p.readOnly).map(p => ensureSharing(p)));
+      if (currentView === 'playlists') renderView();
+    }
+
+    function sharingInfo(playlist) {
+      if (sharingCache.has(playlist.id)) return sharingCache.get(playlist.id);
+      return { nicks: getNicksFromData(playlist), loading: false, error: '' };
+    }
+
+    async function ensureSharing(playlist, force = false) {
+      if (!playlist || playlist.readOnly) return;
+      if (!force && sharingCache.has(playlist.id)) {
+        updateSharingDisplay();
+        return;
+      }
+      const fallback = getNicksFromData(playlist);
+      if (!force && fallback !== null) {
+        sharingCache.set(playlist.id, { nicks: fallback, loading: false, error: '' });
+        updateSharingDisplay();
+        return;
+      }
+      sharingCache.set(playlist.id, { nicks: fallback, loading: true, error: '' });
+      updateSharingDisplay();
+      try {
+        const response = await api('playlistShares', { id: playlist.id });
+        const nicks = getNicksFromData(response);
+        if (nicks === null) throw Error('O servidor não enviou uma lista de nicks.');
+        sharingCache.set(playlist.id, { nicks, loading: false, error: '' });
+      } catch (_) {
+        sharingCache.set(playlist.id, {
+          nicks: fallback, loading: false,
+          error: 'Não foi possível consultar os compartilhamentos. Confira a implantação do Apps Script.'
+        });
+      }
+      updateSharingDisplay();
+    }
+
+    function updateSharingDisplay() {
+      const playlist = currentPlaylist();
+      const box = $('#sharing-summary');
+      if (currentView !== 'playlist' || !playlist || playlist.readOnly) {
+        box.hidden = true;
+      } else {
+        box.hidden = false;
+        box.replaceChildren();
+        const info = sharingInfo(playlist);
+        const left = element('div', '');
+        left.append(element('strong', '', 'Quem pode ver esta playlist'));
+        left.append(element('div', 'muted small', info.loading ? 'Carregando acessos…'
+          : info.nicks === null ? 'Nicks ainda não disponíveis pelo servidor.'
+          : info.nicks.length ? `${info.nicks.length} pessoa(s) com acesso` : 'Ainda não compartilhada.'));
+        if (info.nicks && info.nicks.length) {
+          const chips = element('div', 'nick-chips');
+          info.nicks.forEach(n => chips.append(element('span', 'nick-chip', '@' + n)));
+          left.append(chips);
+        }
+        box.className = 'sharing-summary';
+        box.append(left, button('Gerenciar acessos', () => openSharingDialog(playlist)));
+      }
+      if ($('#sharing-dialog').open) renderSharingRecipients();
+    }
+
+    function openSharingDialog(playlist) {
+      if (!playlist || playlist.readOnly) return;
+      sharingPlaylistId = playlist.id;
+      $('#sharing-playlist-name').textContent = playlist.name;
+      $('#sharing-nick').value = '';
+      $('#sharing-status').textContent = '';
+      $('#sharing-status').style.color = '';
+      renderSharingRecipients();
+      $('#sharing-dialog').showModal();
+      ensureSharing(playlist, true);
+    }
+
+    function renderSharingRecipients() {
+      const box = $('#sharing-recipients');
+      box.replaceChildren();
+      const playlist = playlists.find(p => p.id === sharingPlaylistId);
+      if (!playlist) return;
+      const info = sharingInfo(playlist);
+      if (info.loading) {
+        box.append(element('p', 'muted', 'Consultando nicks…'));
+      } else if (info.nicks === null) {
+        box.append(element('div', 'notice', info.error || 'O servidor ainda não informa os nicks compartilhados.'));
+      } else if (!info.nicks.length) {
+        box.append(element('p', 'muted', 'Só você tem acesso por enquanto.'));
+      } else {
+        info.nicks.forEach(nick => {
+          const row = element('div', 'recipient-row');
+          row.append(element('strong', '', '@' + nick),
+            button('Descompartilhar', () => unsharePlaylist(playlist, nick), 'danger'));
+          box.append(row);
+        });
+      }
+      if (info.error && info.nicks !== null) {
+        box.append(element('p', 'notice', info.error));
+      }
+    }
+
+    async function unsharePlaylist(playlist, nick) {
+      if (!confirm(`Remover o acesso de @${nick} à playlist "${playlist.name}"?`)) return;
+      $('#sharing-status').textContent = 'Removendo acesso…';
+      $('#sharing-status').style.color = '';
+      try {
+        await api('playlistUnshare', { id: playlist.id, nick });
+        const info = sharingInfo(playlist);
+        if (info.nicks !== null) {
+          sharingCache.set(playlist.id, { nicks: info.nicks.filter(n => n !== nick), loading: false, error: '' });
+        }
+        $('#sharing-status').textContent = 'Acesso removido.';
+        $('#sharing-status').style.color = '#9fcaff';
+        await refresh();
+        await ensureSharing(playlist, true);
+      } catch (error) {
+        $('#sharing-status').textContent = error.message;
+      }
+    }
+
+    $('#sharing-close').onclick = () => $('#sharing-dialog').close();
+    $('#sharing-form').onsubmit = async event => {
+      event.preventDefault();
+      const playlist = playlists.find(p => p.id === sharingPlaylistId);
+      const nick = $('#sharing-nick').value.trim();
+      if (!playlist || playlist.readOnly || !nick) return;
+      const submit = $('#sharing-submit');
+      submit.disabled = true;
+      $('#sharing-status').textContent = 'Compartilhando…';
+      $('#sharing-status').style.color = '';
+      try {
+        await api('playlistShare', { id: playlist.id, nick });
+        $('#sharing-nick').value = '';
+        $('#sharing-status').textContent = `Playlist compartilhada com @${nick}.`;
+        $('#sharing-status').style.color = '#9fcaff';
+        await refresh();
+        await ensureSharing(playlist, true);
+      } catch (error) {
+        $('#sharing-status').textContent = error.message;
+      } finally {
+        submit.disabled = false;
+      }
+    };
 
     function renderView() {
       const content = $('#content');
       const actions = $('#view-actions');
-
       content.replaceChildren();
       actions.replaceChildren();
-
+      $('#sharing-summary').hidden = true;
       $('#search').hidden = currentView === 'playlists';
       $('#result-count').textContent = '';
 
       if (currentView === 'playlists') {
+        $('#view-eyebrow').textContent = 'SUA BIBLIOTECA';
         $('#view-title').textContent = 'Minhas Playlists';
-        $('#view-description').textContent =
-          'Suas seleções ficam salvas no Drive e acompanham sua conta.';
-
-        actions.append(button(
-          '＋ Nova playlist',
-          () => perform(() => createPlaylist()),
-          'primary'
-        ));
-
+        $('#view-description').textContent = 'Organize suas cifras e abra as seleções compartilhadas com você.';
+        actions.append(button('＋ Nova playlist', () => perform(() => createPlaylist()), 'primary'));
         if (!playlists.length) {
-          content.append(
-            element('div', 'empty', 'Nenhuma playlist criada.')
-          );
+          content.append(element('div', 'empty', 'Ainda não há playlists. Crie a primeira para organizar suas músicas.'));
           return;
         }
-
         for (const readOnly of [false, true]) {
-          const group = playlists.filter(p => p.readOnly === readOnly);
-
-          if (!group.length) continue;
-
-          content.append(element(
-            'h3',
-            '',
-            readOnly ? 'Compartilhadas com você' : 'Pessoais'
-          ));
-
+          const group = playlists.filter(p => !!p.readOnly === readOnly)
+            .sort((a, b) => collator.compare(a.name, b.name));
+          content.append(element('h2', 'section-heading', readOnly ? 'Compartilhadas' : 'Pessoais'));
+          if (!group.length) {
+            content.append(element('p', 'muted', readOnly ? 'Nenhuma playlist compartilhada com você.' : 'Nenhuma playlist pessoal.'));
+            continue;
+          }
+          const grid = element('div', 'playlist-grid');
           group.forEach(p => {
-            const card = button('', () => openPlaylist(p.id), 'playlist-card');
-
-            card.append(
+            const card = button('', () => openPlaylist(p.id), 'playlist-card' + (readOnly ? ' shared-card' : ''));
+            const info = sharingInfo(p);
+            const count = Array.isArray(p.songIds) ? p.songIds.length : 0;
+            card.append(element('div', 'playlist-cover', readOnly ? '♬' : '♫'),
               element('strong', '', p.name),
-              element(
-                'small',
-                '',
-                `${p.songIds.length} músicas` +
-                (p.readOnly ? ` · de ${p.ownerNick} · Somente leitura` : '')
-              )
-            );
-
-            content.append(card);
+              element('small', '', `${count} ${count === 1 ? 'cifra' : 'cifras'}${readOnly ? ' · De @' + (p.ownerNick || 'outro usuário') : ''}`));
+            if (!readOnly && info.nicks !== null) {
+              card.append(element('small', '', info.nicks.length
+                ? 'Com: ' + info.nicks.map(n => '@' + n).join(', ')
+                : 'Somente você'));
+            }
+            grid.append(card);
           });
+          content.append(grid);
         }
-
         return;
       }
 
       let visibleSongs = songs;
       const playlist = currentPlaylist();
-
       if (currentView === 'playlist' && playlist) {
+        $('#view-eyebrow').textContent = playlist.readOnly ? 'COMPARTILHADA COM VOCÊ' : 'PLAYLIST PESSOAL';
         $('#view-title').textContent = playlist.name;
         $('#view-description').textContent = playlist.readOnly
-          ? `Compartilhada por ${playlist.ownerNick} · Somente leitura`
-          : 'Sua playlist · Salva no Drive';
-
-        visibleSongs = playlist.songIds.map(id => {
-          return songById(id) || {
-            id,
-            title: 'Música indisponível',
-            author: '',
-            key: '',
-            missing: true
-          };
+          ? `Criada por @${playlist.ownerNick || 'outro usuário'} · Somente leitura`
+          : 'Monte seu repertório e compartilhe com outros nicks.';
+        visibleSongs = (playlist.songIds || []).map(id => songById(id) || {
+          id, title: 'Música indisponível', author: '', key: '', missing: true
         });
 
         if (playlist.readOnly) {
-          actions.append(button(
-            'Remover da minha lista',
-            () => perform(async () => {
-              if (!confirm(
-                'Remover este compartilhamento da sua lista? ' +
-                'A playlist original continuará com o criador.'
-              )) return;
-
-              await api('playlistLeave', { id: playlist.id });
-              await refresh();
-            }),
-            'subtle'
-          ));
+          actions.append(button('Remover da minha lista', () => perform(async () => {
+            if (!confirm('Sair desta playlist compartilhada? A original não será excluída.')) return;
+            await api('playlistLeave', { id: playlist.id });
+            await refresh();
+          }), 'subtle'));
         } else {
           actions.append(
             button('＋ Adicionar cifra', openPicker, 'primary'),
-            button('Compartilhar por nick', () => sharePlaylist(playlist)),
+            button('Compartilhar', () => openSharingDialog(playlist)),
             button('Renomear', () => renamePlaylist(playlist)),
             button('Excluir playlist', () => deletePlaylist(playlist), 'danger')
           );
+          updateSharingDisplay();
         }
-
-        actions.append(button(
-          'Copiar para WhatsApp',
-          () => copyPlaylist(playlist)
-        ));
+        actions.append(button('Copiar para WhatsApp', () => copyPlaylist(playlist)));
       } else {
         currentView = 'catalog';
+        $('#view-eyebrow').textContent = 'BIBLIOTECA DE CIFRAS';
         $('#view-title').textContent = 'Repertório';
-        $('#view-description').textContent =
-          'Cifras da Igreja Metodista, organizadas por título.';
-
+        $('#view-description').textContent = 'Encontre músicas, ajuste o tom e organize suas playlists.';
         if (user.admin) {
-          actions.append(button(
-            '＋ Criar nova cifra',
-            () => openEditor(null),
-            'primary'
-          ));
+          actions.append(button('＋ Criar nova cifra', () => openEditor(null), 'primary'));
         }
       }
 
       const query = normalize($('#search').value);
-
-      visibleSongs = visibleSongs.filter(song => {
-        return normalize(song.title + ' ' + song.author).includes(query);
-      });
-
-      $('#result-count').textContent = visibleSongs.length + ' cifras';
-
+      visibleSongs = visibleSongs.filter(song =>
+        normalize(song.title + ' ' + (song.author || '')).includes(query));
+      $('#result-count').textContent = `${visibleSongs.length} ${visibleSongs.length === 1 ? 'cifra' : 'cifras'}`;
       if (!visibleSongs.length) {
-        content.append(element(
-          'div',
-          'empty',
-          currentView === 'playlist'
-            ? 'Nenhuma cifra nesta seleção.'
-            : 'Nenhuma cifra encontrada.'
-        ));
+        content.append(element('div', 'empty', currentView === 'playlist'
+          ? 'Nenhuma cifra nesta playlist. Use “Adicionar cifra” para começar.'
+          : 'Nenhuma cifra encontrada.'));
       }
-
       visibleSongs.forEach(song => {
         const row = element('div', 'song');
-
         const open = button('', () => openSong(song.id), 'song-open');
         open.disabled = !!song.missing;
-
-        open.append(
-          element('strong', '', song.title),
-          element('small', '', song.author || 'MetôCifras')
-        );
-
-        row.append(
-          open,
-          element('span', 'song-key', displayedKey(song))
-        );
-
+        open.append(element('strong', '', song.title),
+          element('small', '', song.author || 'MetôCifras'));
+        row.append(element('div', 'song-art', '♫'), open,
+          element('span', 'song-key', displayedKey(song)));
         const controls = element('div', 'song-tools');
-
         if (!song.missing) {
-          const add = button('+', () => choosePlaylist(song));
+          const add = button('＋ Playlist', () => choosePlaylist(song));
           add.setAttribute('aria-label', 'Adicionar ' + song.title + ' a uma playlist');
           controls.append(add);
         }
-
-        if (
-          currentView === 'playlist' &&
-          playlist &&
-          !playlist.readOnly
-        ) {
+        if (currentView === 'playlist' && playlist && !playlist.readOnly) {
           controls.append(button('Remover', () => perform(async () => {
-            await api('playlistRemoveSong', {
-              id: playlist.id,
-              songId: song.id
-            });
+            await api('playlistRemoveSong', { id: playlist.id, songId: song.id });
             await refresh();
           })));
         }
-
         if (user.admin && !song.missing) {
-          controls.append(
-            button('Editar', () => editSong(song.id)),
-            button('Excluir', () => deleteSong(song), 'danger')
-          );
+          controls.append(button('Editar', () => editSong(song.id)),
+            button('Excluir', () => deleteSong(song), 'danger'));
         }
-
         row.append(controls);
         content.append(row);
       });
@@ -1133,7 +1107,7 @@
       });
 
       await refresh();
-      $('#add-dialog').close();
+      if ($('#add-dialog').open) $('#add-dialog').close();
       openPlaylist(result.id);
     }
 
@@ -1236,14 +1210,7 @@
     $('#picker-close').onclick = () => $('#picker').close();
 
     function sharePlaylist(playlist) {
-      const nick = prompt('Nick do usuário que receberá esta playlist:');
-      if (nick === null || !nick.trim()) return;
-
-      perform(async () => {
-        await api('playlistShare', { id: playlist.id, nick });
-        await refresh();
-        alert('Playlist compartilhada em modo de visualização.');
-      });
+      openSharingDialog(playlist);
     }
 
     function renamePlaylist(playlist) {
@@ -1607,7 +1574,7 @@
         applyBootstrap(data);
 
         $('#login-screen').hidden = true;
-        $('#app').hidden = false;
+        $('#shell').hidden = false;
       } catch (_) {
         clearSession();
       } finally {
