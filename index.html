@@ -1,0 +1,1666 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset128 HiraginoSans-W3;\f2\fnil\fcharset0 ArialUnicodeMS;
+\f3\fnil\fcharset0 Menlo-Regular;\f4\fnil\fcharset77 ZapfDingbatsITC;\f5\fnil\fcharset134 PingFangSC-Regular;
+\f6\fnil\fcharset0 LucidaGrande;\f7\fnil\fcharset0 AppleColorEmoji;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!doctype html>\
+<html lang="pt-BR">\
+<head>\
+  <meta charset="utf-8">\
+  <meta name="viewport"\
+        content="width=device-width,initial-scale=1,viewport-fit=cover">\
+  <meta name="theme-color" content="#215ba5">\
+  <title>Met\'f4Cifras</title>\
+\
+  <style>\
+    :root \{\
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;\
+      color: #20364f;\
+      background: #f5f8fc;\
+      --blue: #215ba5;\
+      --line: #dce5f0;\
+    \}\
+\
+    * \{ box-sizing: border-box; \}\
+    [hidden] \{ display: none !important; \}\
+    body \{ margin: 0; \}\
+    button, input, select, textarea \{ font: inherit; \}\
+\
+    button, .button \{\
+      min-height: 44px;\
+      padding: 10px 14px;\
+      border: 1px solid var(--line);\
+      border-radius: 10px;\
+      background: white;\
+      color: inherit;\
+      cursor: pointer;\
+      touch-action: manipulation;\
+    \}\
+\
+    button:hover \{ background: #eaf1fc; \}\
+    button:disabled \{ opacity: .5; cursor: wait; \}\
+\
+    button:focus-visible,\
+    input:focus-visible,\
+    select:focus-visible,\
+    textarea:focus-visible \{\
+      outline: 3px solid #92b7ea;\
+      outline-offset: 2px;\
+    \}\
+\
+    input, select, textarea \{\
+      width: 100%;\
+      min-height: 44px;\
+      padding: 12px;\
+      border: 1px solid var(--line);\
+      border-radius: 10px;\
+      background: white;\
+      color: inherit;\
+      font-size: 16px;\
+    \}\
+\
+    textarea \{ resize: vertical; line-height: 1.6; \}\
+\
+    label \{\
+      display: grid;\
+      gap: 7px;\
+      margin: 16px 0;\
+      font-size: 14px;\
+      font-weight: 600;\
+    \}\
+\
+    h1, h2, h3 \{ line-height: 1.2; \}\
+    h1 \{ font-size: 32px; letter-spacing: -1px; \}\
+    h2 \{ font-size: 24px; \}\
+\
+    .primary \{\
+      color: white;\
+      border-color: var(--blue);\
+      background: var(--blue);\
+    \}\
+\
+    .primary:hover \{ background: #164780; \}\
+    .subtle \{ background: transparent; border-color: transparent; \}\
+    .danger \{ color: #a12d3a; background: #fff3f5; border-color: #edc9cf; \}\
+    .muted \{ color: #6b7f98; line-height: 1.6; font-size: 14px; \}\
+    .small \{ font-size: 12px; \}\
+    .row \{ display: flex; gap: 10px; align-items: center; flex-wrap: wrap; \}\
+    .grow \{ flex: 1; min-width: 0; \}\
+\
+    .status \{\
+      min-height: 22px;\
+      color: #9b303c;\
+      font-size: 14px;\
+      line-height: 1.5;\
+      overflow-wrap: anywhere;\
+    \}\
+\
+    #login-screen \{\
+      min-height: 100dvh;\
+      display: grid;\
+      place-items: center;\
+      padding: 24px 16px;\
+      background:\
+        radial-gradient(circle at top right, #dceaff, transparent 50%),\
+        #f5f8fc;\
+    \}\
+\
+    .login-card \{\
+      width: min(440px, 100%);\
+      padding: 28px 24px;\
+      border: 1px solid var(--line);\
+      border-radius: 22px;\
+      background: white;\
+      box-shadow: 0 20px 70px #203d6710;\
+    \}\
+\
+    .brand \{ font-size: 29px; font-weight: 750; color: var(--blue); \}\
+    .eyebrow \{ font-size: 11px; letter-spacing: 2px; color: #7185a1; \}\
+    #auth-submit \{ width: 100%; margin-top: 8px; \}\
+    .login-bottom \{ margin-top: 18px; justify-content: space-between; \}\
+\
+    #app \{\
+      width: min(1100px, 100%);\
+      margin: auto;\
+      padding: 0 16px 40px;\
+    \}\
+\
+    .topbar \{\
+      min-height: 72px;\
+      display: flex;\
+      align-items: center;\
+      gap: 12px;\
+      border-bottom: 1px solid var(--line);\
+    \}\
+\
+    .topbar .brand \{ font-size: 22px; \}\
+    .icon-button \{ min-width: 44px; font-size: 22px; padding: 6px; \}\
+    #refresh \{ margin-left: auto; font-size: 13px; color: #6b7f98; \}\
+\
+    .intro \{ padding: 22px 0 16px; \}\
+    .intro h1 \{ margin: 0 0 10px; \}\
+    .intro p \{ margin: 0; \}\
+    #view-actions \{ margin-bottom: 18px; \}\
+    #search \{ margin-bottom: 16px; \}\
+    #result-count \{ margin: 6px 0 12px; \}\
+\
+    .song \{\
+      display: flex;\
+      align-items: center;\
+      gap: 10px;\
+      flex-wrap: wrap;\
+      padding: 14px 12px;\
+      margin-bottom: 10px;\
+      border: 1px solid var(--line);\
+      border-radius: 13px;\
+      background: white;\
+    \}\
+\
+    .song-open \{\
+      flex: 1;\
+      min-width: 120px;\
+      text-align: left;\
+      border: none;\
+      padding: 4px;\
+      background: transparent;\
+    \}\
+\
+    .song-open strong \{ display: block; font-size: 17px; line-height: 1.4; \}\
+    .song-open small \{ display: block; color: #72849b; margin-top: 4px; \}\
+    .song-key \{\
+      border-radius: 8px;\
+      padding: 8px 10px;\
+      background: #eaf2fd;\
+      color: var(--blue);\
+      font-weight: 700;\
+      font-size: 14px;\
+    \}\
+\
+    .song-tools \{ display: flex; gap: 6px; \}\
+    .song-tools button \{ font-size: 13px; padding: 8px 10px; \}\
+\
+    .empty \{\
+      padding: 40px 20px;\
+      border: 1px dashed #c9d8eb;\
+      border-radius: 14px;\
+      text-align: center;\
+      color: #6d829f;\
+    \}\
+\
+    dialog \{\
+      width: min(580px, 94vw);\
+      max-height: 92dvh;\
+      padding: 24px;\
+      border: 1px solid var(--line);\
+      border-radius: 18px;\
+      background: #f9fbff;\
+      color: inherit;\
+    \}\
+\
+    dialog::backdrop \{\
+      background: #0d213eaa;\
+      backdrop-filter: blur(3px);\
+    \}\
+\
+    .dialog-heading \{ display: flex; align-items: center; gap: 10px; \}\
+    .dialog-heading h2 \{ flex: 1; margin: 0; \}\
+    .dialog-actions \{ display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; \}\
+\
+    #drawer \{\
+      position: fixed;\
+      inset: 0 auto 0 0;\
+      margin: 0;\
+      width: min(330px, 88vw);\
+      height: 100dvh;\
+      max-height: 100dvh;\
+      border: 0;\
+      border-radius: 0;\
+      padding: max(22px, env(safe-area-inset-top)) 18px 24px;\
+      background: #edf3fc;\
+    \}\
+\
+    #drawer nav > button \{ width: 100%; text-align: left; margin-bottom: 8px; \}\
+    .sidebar-label \{\
+      padding: 13px 12px;\
+      margin: 22px 0 12px;\
+      border-radius: 9px;\
+      background: #dfeafb;\
+      color: #325782;\
+      font-weight: 700;\
+    \}\
+\
+    .playlist-section \{ margin: 18px 0 8px; color: #71839d; font-size: 12px; \}\
+    .playlist-nav \{\
+      display: block;\
+      width: 100%;\
+      text-align: left;\
+      margin: 5px 0;\
+      border-color: transparent;\
+      background: transparent;\
+      overflow-wrap: anywhere;\
+    \}\
+\
+    .playlist-nav.shared \{ border-left: 3px solid #8ca9d0; border-radius: 3px 9px 9px 3px; \}\
+    .playlist-card \{\
+      width: 100%;\
+      display: block;\
+      text-align: left;\
+      padding: 18px;\
+      margin-bottom: 10px;\
+    \}\
+    .playlist-card strong \{ display: block; \}\
+    .playlist-card small \{ display: block; margin-top: 8px; color: #71839d; \}\
+\
+    #reader \{\
+      position: fixed;\
+      inset: 0;\
+      margin: 0;\
+      width: 100%;\
+      max-width: none;\
+      height: 100dvh;\
+      max-height: 100dvh;\
+      padding: 0;\
+      border: 0;\
+      border-radius: 0;\
+      overflow: hidden;\
+      background: #fbfcff;\
+    \}\
+\
+    #reader[open] \{ display: flex; flex-direction: column; \}\
+    .reader-top \{\
+      display: flex;\
+      align-items: center;\
+      gap: 6px;\
+      padding: max(5px, env(safe-area-inset-top)) 8px 5px;\
+      border-bottom: 1px solid var(--line);\
+    \}\
+\
+    #reader-title \{\
+      flex: 1;\
+      min-width: 0;\
+      overflow: hidden;\
+      white-space: nowrap;\
+      text-overflow: ellipsis;\
+      font-size: 16px;\
+    \}\
+\
+    .reader-controls \{\
+      display: flex;\
+      align-items: center;\
+      gap: 7px;\
+      padding: 6px 10px;\
+      border-bottom: 1px solid var(--line);\
+      flex-wrap: wrap;\
+      font-size: 14px;\
+    \}\
+\
+    #reader-key \{ min-width: 35px; text-align: center; font-size: 20px; \}\
+    #reader-original \{ color: #6f829b; font-size: 12px; margin-left: auto; \}\
+\
+    #sheet \{\
+      flex: 1;\
+      min-height: 0;\
+      overflow: auto;\
+      padding: 16px 16px max(30px, env(safe-area-inset-bottom));\
+      font-size: 20px;\
+      line-height: 1.45;\
+    \}\
+\
+    .lyric-line \{\
+      display: flex;\
+      flex-wrap: wrap;\
+      align-items: end;\
+      row-gap: 10px;\
+      min-height: 1.5em;\
+      margin-bottom: 12px;\
+    \}\
+\
+    .word \{ display: inline-flex; align-items: end; white-space: pre; \}\
+    .part \{ display: inline-flex; flex-direction: column; align-items: start; \}\
+    .chord \{\
+      color: #245fa8;\
+      font-size: .8em;\
+      font-weight: 750;\
+      min-height: 1.4em;\
+      padding-right: .2em;\
+    \}\
+\
+    .lyric \{ white-space: pre; \}\
+    .section \{ font-size: 12px; letter-spacing: 1.6px; color: #7288a4; margin: 24px 0 12px; \}\
+\
+    #reader.dark \{ background: #101e32; color: #edf3ff; --line: #354b69; \}\
+    #reader.dark button \{ background: #203550; color: #edf3ff; \}\
+    #reader.dark .chord \{ color: #9cc4ff; \}\
+\
+    #editor-preview \{ overflow: auto; padding: 14px 0; font-size: 18px; \}\
+    #song-lyrics \{ font-family: ui-monospace, monospace; \}\
+\
+    @media (min-width: 700px) \{\
+      #app \{ padding-inline: 32px; \}\
+      .intro \{ padding-top: 36px; \}\
+      h1 \{ font-size: 42px; \}\
+      #sheet \{ padding: 28px 8vw 60px; \}\
+    \}\
+  </style>\
+</head>\
+\
+<body>\
+  <section id="login-screen">\
+    <div class="login-card">\
+      <div class="brand">
+\f1 \uc0\u9835 
+\f0  Met\'f4Cifras</div>\
+      <p class="eyebrow">IGREJA METODISTA</p>\
+      <h1 id="auth-title">Seu repert\'f3rio, com voc\'ea.</h1>\
+      <p class="muted" id="auth-description">\
+        Entre para abrir cifras e organizar suas playlists.\
+      </p>\
+\
+      <form id="auth-form">\
+        <label id="nick-label">\
+          Nick\
+          <input id="auth-nick"\
+                 minlength="5"\
+                 maxlength="18"\
+                 pattern="[A-Za-z0-9_.-]\{5,18\}"\
+                 autocomplete="username"\
+                 required>\
+        </label>\
+\
+        <label>\
+          Senha\
+          <input id="auth-password"\
+                 type="password"\
+                 minlength="4"\
+                 maxlength="128"\
+                 autocomplete="current-password"\
+                 required>\
+        </label>\
+\
+        <p id="auth-status" class="status" role="status"></p>\
+        <button id="auth-submit" class="primary">Entrar</button>\
+      </form>\
+\
+      <div class="row login-bottom">\
+        <button id="auth-toggle" class="subtle">Cadastre-se</button>\
+        <button id="admin-access" class="subtle small">Administrador</button>\
+      </div>\
+    </div>\
+  </section>\
+\
+  <main id="app" hidden>\
+    <header class="topbar">\
+      <button id="menu-open"\
+              class="icon-button"\
+              aria-label="Abrir menu">
+\f2 \uc0\u9776 
+\f0 </button>\
+      <span class="brand">Met\'f4Cifras</span>\
+      <button id="refresh" class="subtle">
+\f3 \uc0\u8635 
+\f0  Atualizar</button>\
+    </header>\
+\
+    <section class="intro">\
+      <h1 id="view-title">Repert\'f3rio</h1>\
+      <p id="view-description" class="muted"></p>\
+    </section>\
+\
+    <div id="view-actions" class="row"></div>\
+    <input id="search" placeholder="Buscar m\'fasica ou autor\'85" aria-label="Buscar">\
+    <p id="app-status" class="status" role="status"></p>\
+    <p id="result-count" class="muted small"></p>\
+    <div id="content"></div>\
+  </main>\
+\
+  <dialog id="drawer" aria-label="Menu principal">\
+    <div class="dialog-heading">\
+      <h2>Met\'f4Cifras</h2>\
+      <button id="menu-close" aria-label="Fechar menu">
+\f4 \uc0\u10005 
+\f0 </button>\
+    </div>\
+\
+    <p id="user-label" class="muted"></p>\
+\
+    <nav>\
+      <button id="nav-catalog">
+\f1 \uc0\u9835 
+\f0  Repert\'f3rio</button>\
+      <button id="nav-new-song" hidden>
+\f5 \'a3\'ab
+\f0  Criar nova cifra</button>\
+    </nav>\
+\
+    <div class="sidebar-label">Minhas Playlists</div>\
+    <button id="nav-all-playlists" class="playlist-nav">Ver todas</button>\
+    <div id="playlist-menu"></div>\
+    <button id="nav-new-playlist" class="playlist-nav">
+\f5 \'a3\'ab
+\f0  Nova playlist</button>\
+\
+    <hr style="border:0;border-top:1px solid var(--line);margin:24px 0">\
+    <button id="logout" class="subtle">Sair da conta</button>\
+  </dialog>\
+\
+  <dialog id="reader">\
+    <div class="reader-top">\
+      <button id="reader-close" aria-label="Fechar cifra">
+\f6 \uc0\u8592 
+\f0 </button>\
+      <strong id="reader-title"></strong>\
+      <button id="font-down" aria-label="Diminuir fonte">A\uc0\u8722 </button>\
+      <button id="font-up" aria-label="Aumentar fonte">A+</button>\
+      <button id="reader-theme" aria-label="Alternar tema">
+\f1 \uc0\u9680 
+\f0 </button>\
+    </div>\
+\
+    <div class="reader-controls">\
+      <span>Tom</span>\
+      <button id="tone-down" aria-label="Descer meio tom">\uc0\u8722 </button>\
+      <strong id="reader-key"></strong>\
+      <button id="tone-up" aria-label="Subir meio tom">+</button>\
+      <button id="tone-reset">Original</button>\
+      <span id="reader-original"></span>\
+    </div>\
+\
+    <div id="sheet"></div>\
+  </dialog>\
+\
+  <dialog id="song-editor">\
+    <form id="song-form">\
+      <div class="dialog-heading">\
+        <h2 id="editor-title">Criar cifra</h2>\
+        <button id="editor-close" type="button" aria-label="Fechar">
+\f4 \uc0\u10005 
+\f0 </button>\
+      </div>\
+\
+      <label>\
+        T\'edtulo\
+        <input id="song-title" required maxlength="150">\
+      </label>\
+\
+      <label>\
+        Autor\
+        <input id="song-author" maxlength="150">\
+      </label>\
+\
+      <label>\
+        Tom original\
+        <select id="song-key" required></select>\
+      </label>\
+\
+      <label>\
+        Letra com acordes\
+        <textarea id="song-lyrics"\
+                  rows="12"\
+                  maxlength="80000"\
+                  required\
+                  placeholder="Aqui es[C]t\'e1 a letra da [G]m\'fasica."></textarea>\
+      </label>\
+\
+      <p class="muted">\
+        Coloque o acorde antes da s\'edlaba: es[C]t\'e1.\
+        Use \{Verso\} e \{Refr\'e3o\} para identificar se\'e7\'f5es.\
+      </p>\
+\
+      <details>\
+        <summary>Conferir pr\'e9via</summary>\
+        <div id="editor-preview"></div>\
+      </details>\
+\
+      <p id="editor-status" class="status" role="status"></p>\
+\
+      <div class="dialog-actions">\
+        <button id="song-save" class="primary">Salvar no Drive</button>\
+      </div>\
+    </form>\
+  </dialog>\
+\
+  <dialog id="add-dialog">\
+    <div class="dialog-heading">\
+      <h2>Adicionar \'e0 playlist</h2>\
+      <button id="add-close" aria-label="Fechar">
+\f4 \uc0\u10005 
+\f0 </button>\
+    </div>\
+    <p id="add-song-name" class="muted"></p>\
+    <div id="add-options"></div>\
+    <button id="add-new-playlist" class="primary">
+\f5 \'a3\'ab
+\f0  Nova playlist</button>\
+    <p id="add-status" class="status" role="status"></p>\
+  </dialog>\
+\
+  <dialog id="picker">\
+    <div class="dialog-heading">\
+      <h2>Adicionar m\'fasicas</h2>\
+      <button id="picker-close" aria-label="Fechar">
+\f4 \uc0\u10005 
+\f0 </button>\
+    </div>\
+    <input id="picker-search"\
+           placeholder="Buscar no repert\'f3rio\'85"\
+           aria-label="Buscar m\'fasica para adicionar">\
+    <p id="picker-status" class="status" role="status"></p>\
+    <div id="picker-content"></div>\
+  </dialog>\
+\
+  <script>\
+    /*\
+    COLE A URL DA NOVA IMPLANTA\'c7\'c3O DO APPS SCRIPT.\
+    O endere\'e7o precisa terminar em /exec.\
+    */\
+    const SCRIPT_URL = 'COLE_AQUI_A_URL_DO_APPS_SCRIPT';\
+\
+    const $ = selector => document.querySelector(selector);\
+\
+    let token = '';\
+    let user = null;\
+    let songs = [];\
+    let playlists = [];\
+    let currentView = 'catalog';\
+    let currentPlaylistId = null;\
+    let readerSong = null;\
+    let editingSong = null;\
+    let addingSong = null;\
+    let authMode = 'login';\
+\
+    let preferences = \{\
+      tones: \{\},\
+      font: 20,\
+      dark: false\
+    \};\
+\
+    let createSongRequestId = null;\
+    let createSongFingerprint = '';\
+\
+    const sharpNotes = [\
+      'C', 'C#', 'D', 'D#', 'E', 'F',\
+      'F#', 'G', 'G#', 'A', 'A#', 'B'\
+    ];\
+\
+    const flatNotes = [\
+      'C', 'Db', 'D', 'Eb', 'E', 'F',\
+      'Gb', 'G', 'Ab', 'A', 'Bb', 'B'\
+    ];\
+\
+    const noteValues = \{\
+      C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11\
+    \};\
+\
+    const collator = new Intl.Collator('pt-BR', \{\
+      sensitivity: 'base',\
+      numeric: true\
+    \});\
+\
+    function element(tag, className, text) \{\
+      const node = document.createElement(tag);\
+      if (className) node.className = className;\
+      if (text !== undefined) node.textContent = text;\
+      return node;\
+    \}\
+\
+    function button(text, action, className) \{\
+      const node = element('button', className, text);\
+      node.type = 'button';\
+      node.onclick = action;\
+      return node;\
+    \}\
+\
+    function normalize(text) \{\
+      return String(text || '')\
+        .normalize('NFD')\
+        .replace(/[\\u0300-\\u036f]/g, '')\
+        .toLowerCase();\
+    \}\
+\
+    function songById(id) \{\
+      return songs.find(song => song.id === id);\
+    \}\
+\
+    function currentPlaylist() \{\
+      return playlists.find(p => p.id === currentPlaylistId);\
+    \}\
+\
+    function localKey() \{\
+      return 'metocifras.preferences.' + user.id;\
+    \}\
+\
+    function loadPreferences() \{\
+      preferences = \{ tones: \{\}, font: 20, dark: false \};\
+\
+      try \{\
+        const stored = JSON.parse(localStorage.getItem(localKey()));\
+\
+        if (stored && typeof stored.tones === 'object') \{\
+          preferences.tones = stored.tones || \{\};\
+          preferences.font = Math.max(\
+            14,\
+            Math.min(32, Number(stored.font) || 20)\
+          );\
+          preferences.dark = !!stored.dark;\
+        \}\
+      \} catch (_) \{\}\
+    \}\
+\
+    function savePreferences() \{\
+      try \{\
+        localStorage.setItem(localKey(), JSON.stringify(preferences));\
+      \} catch (_) \{\
+        $('#app-status').textContent =\
+          'O navegador n\'e3o permitiu salvar os tons neste dispositivo.';\
+      \}\
+    \}\
+\
+    function transpose(chord, semitones, useFlats) \{\
+      const notes = useFlats ? flatNotes : sharpNotes;\
+\
+      return String(chord).replace(\
+        /(^|\\/)([A-G])([#b]?)/g,\
+        (_, prefix, letter, accidental) => \{\
+          const pitch = noteValues[letter] +\
+            (accidental === '#' ? 1 : accidental === 'b' ? -1 : 0);\
+\
+          const index = ((pitch + semitones) % 12 + 12) % 12;\
+\
+          return prefix + notes[index];\
+        \}\
+      );\
+    \}\
+\
+    function offset(song) \{\
+      const value = preferences.tones[song.id];\
+      return Number.isInteger(value) ? value : 0;\
+    \}\
+\
+    function displayedKey(song) \{\
+      if (!song.key) return 'N\'e3o informado';\
+\
+      return transpose(\
+        song.key,\
+        offset(song),\
+        song.key.includes('b')\
+      );\
+    \}\
+\
+    async function api(action, data = \{\}) \{\
+      if (!SCRIPT_URL.startsWith('https://script.google.com/')) \{\
+        throw Error('Configure SCRIPT_URL no index.html.');\
+      \}\
+\
+      const response = await fetch(SCRIPT_URL, \{\
+        method: 'POST',\
+        headers: \{\
+          'Content-Type': 'text/plain;charset=utf-8'\
+        \},\
+        body: JSON.stringify(\{\
+          ...data,\
+          action,\
+          token\
+        \})\
+      \});\
+\
+      if (!response.ok) \{\
+        throw Error('N\'e3o foi poss\'edvel acessar o servidor.');\
+      \}\
+\
+      let result;\
+\
+      try \{\
+        result = await response.json();\
+      \} catch (_) \{\
+        throw Error(\
+          'O Apps Script n\'e3o retornou JSON. Confira a implanta\'e7\'e3o e as permiss\'f5es.'\
+        );\
+      \}\
+\
+      if (!result.ok) \{\
+        if (result.error === 'SESSION_EXPIRED') \{\
+          clearSession();\
+          throw Error('Sua sess\'e3o expirou. Entre novamente.');\
+        \}\
+\
+        throw Error(result.error || 'Resposta inesperada do servidor.');\
+      \}\
+\
+      return result.data;\
+    \}\
+\
+    function clearSession() \{\
+      token = '';\
+      user = null;\
+\
+      try \{\
+        sessionStorage.removeItem('metocifras.session');\
+      \} catch (_) \{\}\
+\
+      document.querySelectorAll('dialog[open]').forEach(d => d.close());\
+      document.body.style.overflow = '';\
+      $('#app').hidden = true;\
+      $('#login-screen').hidden = false;\
+      setAuthMode('login');\
+    \}\
+\
+    function applyBootstrap(data) \{\
+      user = data.user;\
+      songs = data.songs || [];\
+      playlists = data.playlists || [];\
+\
+      songs.sort((a, b) => collator.compare(a.title, b.title));\
+\
+      $('#user-label').textContent = user.nick +\
+        (user.admin ? ' \'b7 Administrador' : '');\
+\
+      $('#nav-new-song').hidden = !user.admin;\
+\
+      if (\
+        currentView === 'playlist' &&\
+        !playlists.some(p => p.id === currentPlaylistId)\
+      ) \{\
+        currentView = 'playlists';\
+        currentPlaylistId = null;\
+      \}\
+\
+      renderMenu();\
+      renderView();\
+    \}\
+\
+    async function refresh() \{\
+      const data = await api('bootstrap');\
+      applyBootstrap(data);\
+    \}\
+\
+    async function perform(action, target = '#app-status') \{\
+      const status = $(target);\
+      if (status) status.textContent = 'Aguarde\'85';\
+\
+      try \{\
+        await action();\
+        if (status) status.textContent = '';\
+      \} catch (error) \{\
+        if (status) status.textContent = error.message;\
+      \}\
+    \}\
+\
+    function setAuthMode(mode) \{\
+      authMode = mode;\
+\
+      $('#nick-label').hidden = mode === 'admin';\
+      $('#auth-nick').required = mode !== 'admin';\
+      $('#auth-password').value = '';\
+      $('#auth-status').textContent = '';\
+\
+      $('#auth-title').textContent = mode === 'register'\
+        ? 'Crie seu perfil.'\
+        : mode === 'admin'\
+          ? 'Acesso administrador.'\
+          : 'Seu repert\'f3rio, com voc\'ea.';\
+\
+      $('#auth-description').textContent = mode === 'register'\
+        ? 'Nick de 5 a 18 caracteres e senha com pelo menos 4 caracteres.'\
+        : mode === 'admin'\
+          ? 'Use a senha definida pelo respons\'e1vel pelo sistema.'\
+          : 'Entre para abrir cifras e organizar suas playlists.';\
+\
+      $('#auth-submit').textContent = mode === 'register'\
+        ? 'Criar perfil'\
+        : 'Entrar';\
+\
+      $('#auth-toggle').textContent = mode === 'login'\
+        ? 'Cadastre-se'\
+        : 'Voltar ao login';\
+\
+      $('#auth-password').autocomplete = mode === 'register'\
+        ? 'new-password'\
+        : 'current-password';\
+    \}\
+\
+    $('#auth-toggle').onclick = () => \{\
+      setAuthMode(authMode === 'login' ? 'register' : 'login');\
+    \};\
+\
+    $('#admin-access').onclick = () => setAuthMode('admin');\
+\
+    $('#auth-form').onsubmit = async event => \{\
+      event.preventDefault();\
+\
+      const submit = $('#auth-submit');\
+      submit.disabled = true;\
+      $('#auth-toggle').disabled = true;\
+      $('#admin-access').disabled = true;\
+      $('#auth-status').textContent = 'Entrando\'85';\
+\
+      try \{\
+        const action = authMode === 'admin'\
+          ? 'adminLogin'\
+          : authMode === 'register'\
+            ? 'register'\
+            : 'login';\
+\
+        const data = await api(action, \{\
+          nick: $('#auth-nick').value,\
+          password: $('#auth-password').value\
+        \});\
+\
+        token = data.token;\
+        user = data.user;\
+\
+        try \{\
+          sessionStorage.setItem('metocifras.session', token);\
+        \} catch (_) \{\}\
+\
+        loadPreferences();\
+        applyBootstrap(data);\
+\
+        $('#auth-password').value = '';\
+        $('#auth-status').textContent = '';\
+        $('#login-screen').hidden = true;\
+        $('#app').hidden = false;\
+      \} catch (error) \{\
+        $('#auth-status').textContent = error.message;\
+      \} finally \{\
+        submit.disabled = false;\
+        $('#auth-toggle').disabled = false;\
+        $('#admin-access').disabled = false;\
+      \}\
+    \};\
+\
+    $('#logout').onclick = async () => \{\
+      try \{\
+        await api('logout');\
+      \} catch (_) \{\}\
+\
+      clearSession();\
+    \};\
+\
+    $('#refresh').onclick = () => perform(refresh);\
+\
+    function closeMenu() \{\
+      $('#drawer').close();\
+    \}\
+\
+    $('#menu-open').onclick = () => $('#drawer').showModal();\
+    $('#menu-close').onclick = closeMenu;\
+\
+    $('#nav-catalog').onclick = () => \{\
+      closeMenu();\
+      currentView = 'catalog';\
+      currentPlaylistId = null;\
+      $('#search').value = '';\
+      renderView();\
+    \};\
+\
+    $('#nav-all-playlists').onclick = () => \{\
+      closeMenu();\
+      currentView = 'playlists';\
+      currentPlaylistId = null;\
+      $('#search').value = '';\
+      renderView();\
+    \};\
+\
+    $('#nav-new-song').onclick = () => \{\
+      closeMenu();\
+      openEditor(null);\
+    \};\
+\
+    $('#nav-new-playlist').onclick = () => \{\
+      closeMenu();\
+      perform(() => createPlaylist());\
+    \};\
+\
+    function renderMenu() \{\
+      const container = $('#playlist-menu');\
+      container.replaceChildren();\
+\
+      const own = playlists.filter(p => !p.readOnly);\
+      const shared = playlists.filter(p => p.readOnly);\
+\
+      container.append(element('p', 'playlist-section', 'PESSOAIS'));\
+\
+      if (!own.length) \{\
+        container.append(\
+          element('p', 'muted small', 'Nenhuma playlist criada.')\
+        );\
+      \}\
+\
+      own.forEach(p => \{\
+        container.append(button(\
+          p.name,\
+          () => openPlaylist(p.id),\
+          'playlist-nav'\
+        ));\
+      \});\
+\
+      if (shared.length) \{\
+        container.append(\
+          element('p', 'playlist-section', 'COMPARTILHADAS COM VOC\'ca')\
+        );\
+\
+        shared.forEach(p => \{\
+          const item = button(\
+            p.name,\
+            () => openPlaylist(p.id),\
+            'playlist-nav shared'\
+          );\
+\
+          item.append(\
+            element('div', 'muted small', 'de ' + p.ownerNick)\
+          );\
+\
+          container.append(item);\
+        \});\
+      \}\
+    \}\
+\
+    function openPlaylist(id) \{\
+      closeMenu();\
+      currentView = 'playlist';\
+      currentPlaylistId = id;\
+      $('#search').value = '';\
+      renderView();\
+    \}\
+\
+    function renderView() \{\
+      const content = $('#content');\
+      const actions = $('#view-actions');\
+\
+      content.replaceChildren();\
+      actions.replaceChildren();\
+\
+      $('#search').hidden = currentView === 'playlists';\
+      $('#result-count').textContent = '';\
+\
+      if (currentView === 'playlists') \{\
+        $('#view-title').textContent = 'Minhas Playlists';\
+        $('#view-description').textContent =\
+          'Suas sele\'e7\'f5es ficam salvas no Drive e acompanham sua conta.';\
+\
+        actions.append(button(\
+          '
+\f5 \'a3\'ab
+\f0  Nova playlist',\
+          () => perform(() => createPlaylist()),\
+          'primary'\
+        ));\
+\
+        if (!playlists.length) \{\
+          content.append(\
+            element('div', 'empty', 'Nenhuma playlist criada.')\
+          );\
+          return;\
+        \}\
+\
+        for (const readOnly of [false, true]) \{\
+          const group = playlists.filter(p => p.readOnly === readOnly);\
+\
+          if (!group.length) continue;\
+\
+          content.append(element(\
+            'h3',\
+            '',\
+            readOnly ? 'Compartilhadas com voc\'ea' : 'Pessoais'\
+          ));\
+\
+          group.forEach(p => \{\
+            const card = button('', () => openPlaylist(p.id), 'playlist-card');\
+\
+            card.append(\
+              element('strong', '', p.name),\
+              element(\
+                'small',\
+                '',\
+                `$\{p.songIds.length\} m\'fasicas` +\
+                (p.readOnly ? ` \'b7 de $\{p.ownerNick\} \'b7 Somente leitura` : '')\
+              )\
+            );\
+\
+            content.append(card);\
+          \});\
+        \}\
+\
+        return;\
+      \}\
+\
+      let visibleSongs = songs;\
+      const playlist = currentPlaylist();\
+\
+      if (currentView === 'playlist' && playlist) \{\
+        $('#view-title').textContent = playlist.name;\
+        $('#view-description').textContent = playlist.readOnly\
+          ? `Compartilhada por $\{playlist.ownerNick\} \'b7 Somente leitura`\
+          : 'Sua playlist \'b7 Salva no Drive';\
+\
+        visibleSongs = playlist.songIds.map(id => \{\
+          return songById(id) || \{\
+            id,\
+            title: 'M\'fasica indispon\'edvel',\
+            author: '',\
+            key: '',\
+            missing: true\
+          \};\
+        \});\
+\
+        if (playlist.readOnly) \{\
+          actions.append(button(\
+            'Remover da minha lista',\
+            () => perform(async () => \{\
+              if (!confirm(\
+                'Remover este compartilhamento da sua lista? ' +\
+                'A playlist original continuar\'e1 com o criador.'\
+              )) return;\
+\
+              await api('playlistLeave', \{ id: playlist.id \});\
+              await refresh();\
+            \}),\
+            'subtle'\
+          ));\
+        \} else \{\
+          actions.append(\
+            button('
+\f5 \'a3\'ab
+\f0  Adicionar cifra', openPicker, 'primary'),\
+            button('Compartilhar por nick', () => sharePlaylist(playlist)),\
+            button('Renomear', () => renamePlaylist(playlist)),\
+            button('Excluir playlist', () => deletePlaylist(playlist), 'danger')\
+          );\
+        \}\
+\
+        actions.append(button(\
+          'Copiar para WhatsApp',\
+          () => copyPlaylist(playlist)\
+        ));\
+      \} else \{\
+        currentView = 'catalog';\
+        $('#view-title').textContent = 'Repert\'f3rio';\
+        $('#view-description').textContent =\
+          'Cifras da Igreja Metodista, organizadas por t\'edtulo.';\
+\
+        if (user.admin) \{\
+          actions.append(button(\
+            '
+\f5 \'a3\'ab
+\f0  Criar nova cifra',\
+            () => openEditor(null),\
+            'primary'\
+          ));\
+        \}\
+      \}\
+\
+      const query = normalize($('#search').value);\
+\
+      visibleSongs = visibleSongs.filter(song => \{\
+        return normalize(song.title + ' ' + song.author).includes(query);\
+      \});\
+\
+      $('#result-count').textContent = visibleSongs.length + ' cifras';\
+\
+      if (!visibleSongs.length) \{\
+        content.append(element(\
+          'div',\
+          'empty',\
+          currentView === 'playlist'\
+            ? 'Nenhuma cifra nesta sele\'e7\'e3o.'\
+            : 'Nenhuma cifra encontrada.'\
+        ));\
+      \}\
+\
+      visibleSongs.forEach(song => \{\
+        const row = element('div', 'song');\
+\
+        const open = button('', () => openSong(song.id), 'song-open');\
+        open.disabled = !!song.missing;\
+\
+        open.append(\
+          element('strong', '', song.title),\
+          element('small', '', song.author || 'Met\'f4Cifras')\
+        );\
+\
+        row.append(\
+          open,\
+          element('span', 'song-key', displayedKey(song))\
+        );\
+\
+        const controls = element('div', 'song-tools');\
+\
+        if (!song.missing) \{\
+          const add = button('+', () => choosePlaylist(song));\
+          add.setAttribute('aria-label', 'Adicionar ' + song.title + ' a uma playlist');\
+          controls.append(add);\
+        \}\
+\
+        if (\
+          currentView === 'playlist' &&\
+          playlist &&\
+          !playlist.readOnly\
+        ) \{\
+          controls.append(button('Remover', () => perform(async () => \{\
+            await api('playlistRemoveSong', \{\
+              id: playlist.id,\
+              songId: song.id\
+            \});\
+            await refresh();\
+          \})));\
+        \}\
+\
+        if (user.admin && !song.missing) \{\
+          controls.append(\
+            button('Editar', () => editSong(song.id)),\
+            button('Excluir', () => deleteSong(song), 'danger')\
+          );\
+        \}\
+\
+        row.append(controls);\
+        content.append(row);\
+      \});\
+    \}\
+\
+    $('#search').oninput = renderView;\
+\
+    async function createPlaylist(songId = null) \{\
+      const name = prompt('Nome da nova playlist:');\
+      if (name === null || !name.trim()) return;\
+\
+      const result = await api('playlistCreate', \{\
+        name,\
+        songId,\
+        requestId: crypto.randomUUID()\
+      \});\
+\
+      await refresh();\
+      $('#add-dialog').close();\
+      openPlaylist(result.id);\
+    \}\
+\
+    function choosePlaylist(song) \{\
+      addingSong = song;\
+      $('#add-song-name').textContent = song.title;\
+      $('#add-status').textContent = '';\
+\
+      const options = $('#add-options');\
+      options.replaceChildren();\
+\
+      const own = playlists.filter(p => !p.readOnly);\
+\
+      if (!own.length) \{\
+        options.append(\
+          element('p', 'muted', 'Voc\'ea ainda n\'e3o criou playlists.')\
+        );\
+      \}\
+\
+      own.forEach(playlist => \{\
+        const present = playlist.songIds.includes(song.id);\
+        const item = button(\
+          playlist.name + (present ? ' \'b7 J\'e1 adicionada' : ''),\
+          async () => \{\
+            item.disabled = true;\
+\
+            await perform(async () => \{\
+              await api('playlistAdd', \{\
+                id: playlist.id,\
+                songId: song.id\
+              \});\
+              await refresh();\
+              $('#add-dialog').close();\
+            \}, '#add-status');\
+\
+            item.disabled = present;\
+          \},\
+          'playlist-card'\
+        );\
+\
+        item.disabled = present;\
+        options.append(item);\
+      \});\
+\
+      $('#add-dialog').showModal();\
+    \}\
+\
+    $('#add-close').onclick = () => $('#add-dialog').close();\
+\
+    $('#add-new-playlist').onclick = () => \{\
+      perform(() => createPlaylist(addingSong.id), '#add-status');\
+    \};\
+\
+    function openPicker() \{\
+      $('#picker-search').value = '';\
+      $('#picker-status').textContent = '';\
+      renderPicker();\
+      $('#picker').showModal();\
+    \}\
+\
+    function renderPicker() \{\
+      const playlist = currentPlaylist();\
+      const container = $('#picker-content');\
+      const query = normalize($('#picker-search').value);\
+\
+      container.replaceChildren();\
+\
+      if (!playlist || playlist.readOnly) return;\
+\
+      songs.filter(song => \{\
+        return normalize(song.title + ' ' + song.author).includes(query);\
+      \}).forEach(song => \{\
+        const present = playlist.songIds.includes(song.id);\
+\
+        const item = button(\
+          song.title + (present ? ' 
+\f6 \uc0\u10003 
+\f0 ' : ' 
+\f5 \'a3\'ab
+\f0 '),\
+          async () => \{\
+            item.disabled = true;\
+\
+            await perform(async () => \{\
+              await api('playlistAdd', \{\
+                id: playlist.id,\
+                songId: song.id\
+              \});\
+              await refresh();\
+              renderPicker();\
+            \}, '#picker-status');\
+\
+            if (item.isConnected) item.disabled = false;\
+          \},\
+          'playlist-card'\
+        );\
+\
+        item.disabled = present;\
+        container.append(item);\
+      \});\
+    \}\
+\
+    $('#picker-search').oninput = renderPicker;\
+    $('#picker-close').onclick = () => $('#picker').close();\
+\
+    function sharePlaylist(playlist) \{\
+      const nick = prompt('Nick do usu\'e1rio que receber\'e1 esta playlist:');\
+      if (nick === null || !nick.trim()) return;\
+\
+      perform(async () => \{\
+        await api('playlistShare', \{ id: playlist.id, nick \});\
+        await refresh();\
+        alert('Playlist compartilhada em modo de visualiza\'e7\'e3o.');\
+      \});\
+    \}\
+\
+    function renamePlaylist(playlist) \{\
+      const name = prompt('Novo nome da playlist:', playlist.name);\
+      if (name === null || !name.trim()) return;\
+\
+      perform(async () => \{\
+        await api('playlistRename', \{ id: playlist.id, name \});\
+        await refresh();\
+      \});\
+    \}\
+\
+    function deletePlaylist(playlist) \{\
+      if (!confirm(\
+        'Excluir a playlist "' + playlist.name + '"? ' +\
+        'Ela tamb\'e9m deixar\'e1 de aparecer para quem recebeu o compartilhamento. ' +\
+        'As cifras n\'e3o ser\'e3o exclu\'eddas.'\
+      )) return;\
+\
+      perform(async () => \{\
+        await api('playlistDelete', \{ id: playlist.id \});\
+        await refresh();\
+      \});\
+    \}\
+\
+    async function copyPlaylist(playlist) \{\
+      const clean = value => String(value)\
+        .replace(/[\\r\\n]+/g, ' ')\
+        .replace(/[*_~`]/g, '');\
+\
+      const lines = playlist.songIds.map((id, index) => \{\
+        const song = songById(id);\
+\
+        return song\
+          ? `$\{index + 1\}. *$\{clean(song.title)\}* \'97 Tom: *$\{clean(displayedKey(song))\}*`\
+          : `$\{index + 1\}. M\'fasica indispon\'edvel`;\
+      \});\
+\
+      const text = `
+\f7 \uc0\u55356 \u57269 
+\f0  *$\{clean(playlist.name)\}*\\n\\n` + lines.join('\\n');\
+\
+      try \{\
+        await navigator.clipboard.writeText(text);\
+        alert('Lista copiada. Cole no WhatsApp.');\
+      \} catch (_) \{\
+        prompt('Copie o texto abaixo:', text);\
+      \}\
+    \}\
+\
+    /* Leitor e alinhamento dos acordes */\
+\
+    function splitWords(line) \{\
+      const result = [];\
+      let word = [];\
+      let chord = '';\
+      let text = '';\
+\
+      function flushPart() \{\
+        if (text || chord) \{\
+          word.push(\{ chord, text \});\
+          chord = '';\
+          text = '';\
+        \}\
+      \}\
+\
+      for (let i = 0; i < line.length; i++) \{\
+        if (line[i] === '[') \{\
+          const end = line.indexOf(']', i);\
+\
+          if (end >= 0) \{\
+            flushPart();\
+            chord = line.slice(i + 1, end);\
+            i = end;\
+            continue;\
+          \}\
+        \}\
+\
+        text += line[i];\
+\
+        if (line[i] === ' ') \{\
+          flushPart();\
+          result.push(word);\
+          word = [];\
+        \}\
+      \}\
+\
+      flushPart();\
+      if (word.length) result.push(word);\
+\
+      return result;\
+    \}\
+\
+    function drawLyrics(target, lyrics, semitones, useFlats) \{\
+      target.replaceChildren();\
+\
+      String(lyrics).split('\\n').forEach(line => \{\
+        if (/^\\\{.*\\\}$/.test(line.trim())) \{\
+          target.append(element(\
+            'div',\
+            'section',\
+            line.trim().slice(1, -1)\
+          ));\
+          return;\
+        \}\
+\
+        const row = element('div', 'lyric-line');\
+\
+        splitWords(line).forEach(parts => \{\
+          const word = element('span', 'word');\
+\
+          parts.forEach(part => \{\
+            const node = element('span', 'part');\
+\
+            node.append(\
+              element(\
+                'span',\
+                'chord',\
+                transpose(part.chord, semitones, useFlats)\
+              ),\
+              element('span', 'lyric', part.text)\
+            );\
+\
+            word.append(node);\
+          \});\
+\
+          row.append(word);\
+        \});\
+\
+        target.append(row);\
+      \});\
+    \}\
+\
+    let openCounter = 0;\
+\
+    async function openSong(id) \{\
+      const requestNumber = ++openCounter;\
+\
+      $('#reader-title').textContent = songById(id)?.title || 'Cifra';\
+      $('#reader-key').textContent = '\'85';\
+      $('#reader-original').textContent = '';\
+      $('#sheet').textContent = 'Carregando cifra\'85';\
+      readerSong = null;\
+\
+      if (!$('#reader').open) $('#reader').showModal();\
+\
+      document.body.style.overflow = 'hidden';\
+\
+      try \{\
+        const song = await api('songRead', \{ id \});\
+\
+        if (requestNumber !== openCounter || !$('#reader').open) return;\
+\
+        readerSong = song;\
+        paintReader();\
+      \} catch (error) \{\
+        if ($('#reader').open) \{\
+          $('#sheet').textContent = error.message;\
+        \}\
+      \}\
+    \}\
+\
+    function paintReader() \{\
+      if (!readerSong) return;\
+\
+      $('#reader-title').textContent = readerSong.title;\
+      $('#reader-key').textContent = displayedKey(readerSong);\
+      $('#reader-original').textContent =\
+        'Original: ' + (readerSong.key || 'n\'e3o informado');\
+\
+      $('#sheet').style.fontSize = preferences.font + 'px';\
+      $('#reader').classList.toggle('dark', preferences.dark);\
+\
+      drawLyrics(\
+        $('#sheet'),\
+        readerSong.lyrics,\
+        offset(readerSong),\
+        readerSong.key.includes('b')\
+      );\
+    \}\
+\
+    function changeTone(delta) \{\
+      if (!readerSong) return;\
+\
+      const scroll = $('#sheet').scrollTop;\
+\
+      preferences.tones[readerSong.id] = delta === null\
+        ? 0\
+        : offset(readerSong) + delta;\
+\
+      savePreferences();\
+      paintReader();\
+      $('#sheet').scrollTop = scroll;\
+      renderView();\
+    \}\
+\
+    $('#tone-down').onclick = () => changeTone(-1);\
+    $('#tone-up').onclick = () => changeTone(1);\
+    $('#tone-reset').onclick = () => changeTone(null);\
+\
+    $('#font-down').onclick = () => \{\
+      preferences.font = Math.max(14, preferences.font - 2);\
+      savePreferences();\
+      paintReader();\
+    \};\
+\
+    $('#font-up').onclick = () => \{\
+      preferences.font = Math.min(32, preferences.font + 2);\
+      savePreferences();\
+      paintReader();\
+    \};\
+\
+    $('#reader-theme').onclick = () => \{\
+      preferences.dark = !preferences.dark;\
+      savePreferences();\
+      paintReader();\
+    \};\
+\
+    $('#reader-close').onclick = () => $('#reader').close();\
+\
+    $('#reader').addEventListener('close', () => \{\
+      openCounter++;\
+      readerSong = null;\
+      document.body.style.overflow = '';\
+      $('#sheet').replaceChildren();\
+    \});\
+\
+    /* Administra\'e7\'e3o de cifras */\
+\
+    const keyOptions = [\
+      'C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E',\
+      'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb', 'B'\
+    ];\
+\
+    [...keyOptions, ...keyOptions.map(k => k + 'm')].forEach(key => \{\
+      $('#song-key').add(new Option(key, key));\
+    \});\
+\
+    function openEditor(song) \{\
+      if (!user?.admin) return;\
+\
+      editingSong = song;\
+      createSongRequestId = null;\
+      createSongFingerprint = '';\
+\
+      $('#editor-title').textContent = song ? 'Editar cifra' : 'Criar cifra';\
+      $('#song-title').value = song?.title || '';\
+      $('#song-author').value = song?.author || '';\
+      $('#song-key').value = song?.key || 'C';\
+      $('#song-lyrics').value = song?.lyrics || '';\
+      $('#editor-status').textContent = '';\
+\
+      updatePreview();\
+      $('#song-editor').showModal();\
+    \}\
+\
+    function editSong(id) \{\
+      perform(async () => \{\
+        const song = await api('songRead', \{ id \});\
+        openEditor(song);\
+      \});\
+    \}\
+\
+    function updatePreview() \{\
+      drawLyrics(\
+        $('#editor-preview'),\
+        $('#song-lyrics').value,\
+        0,\
+        $('#song-key').value.includes('b')\
+      );\
+    \}\
+\
+    $('#song-lyrics').oninput = updatePreview;\
+    $('#song-key').onchange = updatePreview;\
+    $('#editor-close').onclick = () => $('#song-editor').close();\
+\
+    $('#song-editor').addEventListener('cancel', event => \{\
+      if ($('#song-save').disabled) event.preventDefault();\
+    \});\
+\
+    $('#song-form').onsubmit = async event => \{\
+      event.preventDefault();\
+\
+      if (!user?.admin) return;\
+\
+      const song = \{\
+        title: $('#song-title').value.trim(),\
+        author: $('#song-author').value.trim(),\
+        key: $('#song-key').value,\
+        lyrics: $('#song-lyrics').value\
+      \};\
+\
+      const fingerprint = JSON.stringify(song);\
+\
+      if (fingerprint !== createSongFingerprint) \{\
+        createSongRequestId = crypto.randomUUID();\
+        createSongFingerprint = fingerprint;\
+      \}\
+\
+      $('#song-save').disabled = true;\
+      $('#editor-close').disabled = true;\
+      $('#editor-status').textContent = 'Salvando\'85';\
+\
+      try \{\
+        if (editingSong) \{\
+          await api('songUpdate', \{\
+            id: editingSong.id,\
+            revision: editingSong.revision,\
+            song\
+          \});\
+        \} else \{\
+          await api('songCreate', \{\
+            requestId: createSongRequestId,\
+            song\
+          \});\
+        \}\
+\
+        $('#song-editor').close();\
+        await refresh();\
+      \} catch (error) \{\
+        $('#editor-status').textContent = error.message;\
+      \} finally \{\
+        $('#song-save').disabled = false;\
+        $('#editor-close').disabled = false;\
+      \}\
+    \};\
+\
+    function deleteSong(song) \{\
+      if (!user?.admin) return;\
+\
+      if (!confirm(\
+        'Enviar "' + song.title + '" para a lixeira do Drive? ' +\
+        'Ela tamb\'e9m ser\'e1 removida das playlists.'\
+      )) return;\
+\
+      perform(async () => \{\
+        await api('songDelete', \{\
+          id: song.id,\
+          revision: song.revision\
+        \});\
+\
+        delete preferences.tones[song.id];\
+        savePreferences();\
+        await refresh();\
+      \});\
+    \}\
+\
+    /* Retomar a sess\'e3o desta aba */\
+\
+    (async function start() \{\
+      try \{\
+        token = sessionStorage.getItem('metocifras.session') || '';\
+      \} catch (_) \{\}\
+\
+      if (!token) return;\
+\
+      $('#auth-status').textContent = 'Retomando sess\'e3o\'85';\
+\
+      try \{\
+        const data = await api('bootstrap');\
+        user = data.user;\
+        loadPreferences();\
+        applyBootstrap(data);\
+\
+        $('#login-screen').hidden = true;\
+        $('#app').hidden = false;\
+      \} catch (_) \{\
+        clearSession();\
+      \} finally \{\
+        $('#auth-status').textContent = '';\
+      \}\
+    \})();\
+  </script>\
+</body>\
+</html>}
